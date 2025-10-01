@@ -14,8 +14,8 @@ public class Jump : MonoBehaviour
     [SerializeField, Tooltip("Prevents jumping when the transform is in mid-air.")]
     private GroundCheck groundCheck;
 
-    [Header("Input Action")]
-    public InputAction jumpAction; // Assign this in the Inspector or via code.
+    //[Header("Input Action")]
+    //public InputAction jumpAction; // Assign this in the Inspector or via code.
 
     void Awake()
     {   

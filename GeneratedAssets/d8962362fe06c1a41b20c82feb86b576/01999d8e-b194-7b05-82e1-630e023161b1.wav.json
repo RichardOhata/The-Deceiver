@@ -1,0 +1,13 @@
+{
+    "asset": "d8962362fe06c1a41b20c82feb86b576",
+    "fileName": "01999d8e-b194-7b05-82e1-630e023161b1.wav",
+    "prompt": "Generate a short, mystical reward sound for discovering a secret. Bright bell-like tones, slightly metallic and ethereal, with a subtle high-pitched shimmer. Three to five staccato ascending notes, soft reverb, airy and sparkling, evoking delight and wonder.",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "f35fa013375e45e2611167276aa31d74",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

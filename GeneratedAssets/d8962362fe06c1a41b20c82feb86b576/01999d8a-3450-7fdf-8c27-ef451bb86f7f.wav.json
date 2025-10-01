@@ -1,0 +1,13 @@
+{
+    "asset": "d8962362fe06c1a41b20c82feb86b576",
+    "fileName": "01999d8a-3450-7fdf-8c27-ef451bb86f7f.wav",
+    "prompt": "short, bright, rewarding, mystical, bell, clear, resonant, mystical",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "b75581b61ef37f36daae0f1b3df18e22",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}
