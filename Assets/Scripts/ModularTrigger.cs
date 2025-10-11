@@ -25,4 +25,9 @@ public class ModularTrigger : MonoBehaviour
             onExit?.Invoke();
         }
     }
+
+    public void SetInactive()
+    {
+        this.gameObject.SetActive(false);
+    }
 }

@@ -640,15 +640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpStrength: 2
   groundCheck: {fileID: 114503055206606986}
-  jumpAction:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4a93e34b-09eb-4222-8c8c-e078c44c4acb
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &114762042097486276
 MonoBehaviour:
   m_ObjectHideFlags: 0
