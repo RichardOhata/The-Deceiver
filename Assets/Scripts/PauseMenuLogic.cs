@@ -28,6 +28,17 @@ public class PauseMenuLogic : MonoBehaviour
 
     private void OnPausePerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+
+        CaptchaPuzzle captcha = GameObject.FindFirstObjectByType<CaptchaPuzzle>();
+        if (captcha != null && captcha.IsCaptchaOpen)
+        {
+            // Close the captcha instead of pausing
+            captcha.CloseCaptcha();
+            return; // stop further processing
+        }
+
+
+
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
         if (isPaused)

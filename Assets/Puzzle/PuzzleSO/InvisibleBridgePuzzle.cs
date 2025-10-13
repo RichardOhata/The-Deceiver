@@ -30,7 +30,6 @@ public class InvisibleBridgePuzzle : Puzzle
         Vector3 toanchor = (backwardsAnchor.transform.position - playerCamera.position).normalized;
         Vector3 forward = playerCamera.forward;
         float angle = Vector3.Angle(forward, toanchor);
-        Debug.Log(angle);
         return angle < backwardsAngleThreshold;
     }
 }
