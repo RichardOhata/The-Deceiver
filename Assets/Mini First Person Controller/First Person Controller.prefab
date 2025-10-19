@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 4207293392497186}
-  sensitivity: 0.5
+  sensitivity: 0.4
   smoothing: 2
 --- !u!114 &114103969153859672
 MonoBehaviour:
@@ -567,7 +567,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773623360729482}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20ce336fadccd19498ceca6165131a57, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
