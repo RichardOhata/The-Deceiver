@@ -5,7 +5,6 @@ using UnityEngine;
 public class CaptchaGenerator : ScriptableObject
 {
     public Captcha[] captchas;
-
     public static int index = 0;
     public Captcha Generate()
     {
@@ -14,6 +13,12 @@ public class CaptchaGenerator : ScriptableObject
 
     public bool IsCodeValid(string input, Captcha c)
     {
-        return (input == c.value);
+        return (input == c.value );
     }
+
+    public bool IsCodeValid(string input, Captcha c, char extraChar)
+    {
+        return (input == c.value + extraChar);
+    }
+
 }

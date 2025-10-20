@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Captcha
+public struct Captcha
 {
     public Sprite Image;
     public string value;

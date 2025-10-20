@@ -10,6 +10,13 @@ public class PauseMenuLogic : MonoBehaviour
 
     private GameObject player;
 
+    public static PauseMenuLogic Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -28,10 +35,16 @@ public class PauseMenuLogic : MonoBehaviour
 
     private void OnPausePerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        HandlePause();
+      
+    }
 
+    public void HandlePause()
+    {
         CaptchaPuzzle captcha = GameObject.FindFirstObjectByType<CaptchaPuzzle>();
         if (captcha != null && captcha.IsCaptchaOpen)
         {
+            isPaused = !isPaused;
             // Close the captcha instead of pausing
             captcha.CloseCaptcha();
             return; // stop further processing
@@ -48,7 +61,8 @@ public class PauseMenuLogic : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
-        } else
+        }
+        else
         {
             player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = true;
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = true;

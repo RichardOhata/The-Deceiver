@@ -12,11 +12,17 @@ public class CaptchaUI : MonoBehaviour {
     [SerializeField] private Button uiRefreshButton;
     [SerializeField] private Button uiSubmitButton;
 
+
+    [SerializeField] private TextMeshProUGUI uiProgressText;
+
     [Header("Captcha Generator: ")]
     [SerializeField] private CaptchaGenerator captchaGenerator;
 
+    //[SerializeField] private CaptchaPuzzle captchaPuzzle; // Captcha Gameobject
+
     private Captcha currentCaptcha;
 
+    [SerializeField] private char extraChar;
     private void Start()
     {
         GenerateCaptcha();
@@ -24,8 +30,9 @@ public class CaptchaUI : MonoBehaviour {
         uiSubmitButton.onClick.AddListener(Submit);
     }
 
-    private void GenerateCaptcha()
+    public void GenerateCaptcha()
     {
+       
         currentCaptcha = captchaGenerator.Generate();
 
         uiCodeImage.sprite = currentCaptcha.Image;
@@ -34,17 +41,55 @@ public class CaptchaUI : MonoBehaviour {
 
     private void Submit()
     {
-        string enteredCode = uiCodeInput.text;
+        string enteredCode = uiCodeInput.text.Trim();
+        uiErrorText.gameObject.SetActive(false);
+        uiCorrectText.gameObject.SetActive(false);
 
-        if (captchaGenerator.IsCodeValid(enteredCode, currentCaptcha))
+        bool isValid;
+
+        // Handle both cases (with or without extraChar)
+        if (extraChar == '\0')
+            isValid = captchaGenerator.IsCodeValid(enteredCode, currentCaptcha);
+        else
+            isValid = captchaGenerator.IsCodeValid(enteredCode, currentCaptcha, extraChar);
+
+        if (isValid)
         {
-            uiErrorText.gameObject.SetActive(false);
             uiCorrectText.gameObject.SetActive(true);
-        } else
+
+            StartCoroutine(DelayedAction(1.0f, () =>
+            {
+                GameObject.FindGameObjectWithTag("Captcha Puzzle")
+                    .GetComponent<CaptchaPuzzle>()
+                    .ProgressPuzzle();
+
+                uiCorrectText.gameObject.SetActive(false);
+            }));
+        }
+        else
         {
             uiErrorText.gameObject.SetActive(true);
         }
     }
 
+    public void SetExtraChar(char newChar)
+    {
+        extraChar = newChar;
+    }
 
+    public void UpdateProgressText(int num1, int num2)
+    {
+        uiProgressText.text = num1 + "/" + num2;
+    }
+
+    private System.Collections.IEnumerator DelayedAction(float delay, System.Action action)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        action?.Invoke();
+    }
+
+    public void ResetInputField()
+    {
+        uiCodeInput.text = "";
+    }
 } 

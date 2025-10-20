@@ -13,7 +13,13 @@ public class UIUpdate : MonoBehaviour
         uiPanel.GetComponent<TextMeshProUGUI>().text = uiPanelText;
         uiPanel.SetActive(true);
     }
-         
+
+    public void updatePanelText(string panelText)
+    {
+        uiPanel.GetComponent<TextMeshProUGUI>().text = panelText;
+        uiPanel.SetActive(true);
+    }
+
     public void DisablePanel()
     {
         uiPanel.SetActive(false);

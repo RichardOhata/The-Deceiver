@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaptchaGenerator
   captchas:
   - Image: {fileID: 1249614612, guid: 8f6877c89da33c64c9deafa4b242dda0, type: 3}
-    value: 2mH65i!
+    value: 2mH65i
   - Image: {fileID: -1087496262, guid: 8f6877c89da33c64c9deafa4b242dda0, type: 3}
-    value: 3ib3n9!
+    value: aFe3bx
   - Image: {fileID: -123754083, guid: 8f6877c89da33c64c9deafa4b242dda0, type: 3}
-    value: aFe3bx!
+    value: 3ib3n9
   - Image: {fileID: -933153262, guid: 8f6877c89da33c64c9deafa4b242dda0, type: 3}
-    value: mvi1nL!
+    value: mvi1nL
