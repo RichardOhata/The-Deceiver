@@ -11,7 +11,7 @@ public class CaptchaUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI uiCorrectText;
     [SerializeField] private Button uiRefreshButton;
     [SerializeField] private Button uiSubmitButton;
-
+    [SerializeField] private Button uiCloseButton;
 
     [SerializeField] private TextMeshProUGUI uiProgressText;
 
@@ -28,6 +28,7 @@ public class CaptchaUI : MonoBehaviour {
         GenerateCaptcha();
         uiRefreshButton.onClick.AddListener(GenerateCaptcha);
         uiSubmitButton.onClick.AddListener(Submit);
+        uiCloseButton.onClick.AddListener(Close);
     }
 
     public void GenerateCaptcha()
@@ -91,5 +92,10 @@ public class CaptchaUI : MonoBehaviour {
     public void ResetInputField()
     {
         uiCodeInput.text = "";
+    }
+
+    private void Close()
+    {
+        GameObject.FindGameObjectWithTag("Captcha Puzzle").GetComponent<CaptchaPuzzle>().CloseCaptcha();
     }
 } 

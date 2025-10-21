@@ -16,6 +16,7 @@ public class CaptchaPuzzle : Puzzle
     [SerializeField] private GameObject puzzleText;
     private GameObject player;
 
+    [SerializeField] private GameObject slidingDoor;
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -106,6 +107,8 @@ public class CaptchaPuzzle : Puzzle
                 SolvePuzzle();
                 PauseMenuLogic.Instance.HandlePause();
                 captchaUI.SetActive(false);
+                slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
+                slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
                 return;
         }
 
