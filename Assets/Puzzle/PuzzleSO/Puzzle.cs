@@ -8,10 +8,22 @@ public abstract class Puzzle : MonoBehaviour
         Debug.Log($"Starting puzzle: {puzzleData.puzzleName}");
     }
 
-    public abstract void SolvePuzzle();
+    public virtual void SolvePuzzle()
+    {
+        Debug.Log($"Puzzle solved: {puzzleData.puzzleName}");
+        PlaySolveSFX();
+    }
 
     public virtual void ShowHint()
     {
        
+    }
+
+    private void PlaySolveSFX()
+    {
+        if (SFXManager.Instance != null && !puzzleData.isSolved)
+        {
+            SFXManager.Instance.PlaySFX();
+        }
     }
 }

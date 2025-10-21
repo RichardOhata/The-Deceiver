@@ -16,4 +16,12 @@ public class PuzzleData : ScriptableObject
     public string hint;
     public bool isSolved = false;
 
+    #if UNITY_EDITOR
+    private void OnEnable()
+    {
+        isSolved = false;
+    }
+    #endif
+
+   
 }

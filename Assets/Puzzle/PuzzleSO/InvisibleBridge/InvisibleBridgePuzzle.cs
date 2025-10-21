@@ -13,7 +13,7 @@ public class InvisibleBridgePuzzle : Puzzle
     }
     public override void SolvePuzzle()
     {
-   
+        base.SolvePuzzle();
         puzzleData.isSolved = true;
     }
 

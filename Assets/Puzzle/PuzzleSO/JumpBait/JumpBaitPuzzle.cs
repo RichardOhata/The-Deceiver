@@ -13,6 +13,7 @@ public class JumpBaitPuzzle : Puzzle
     }
     public override void SolvePuzzle()
     {
+        base.SolvePuzzle();
         jumpTrigger.SetActive(false);
         puzzleData.isSolved = true;
 

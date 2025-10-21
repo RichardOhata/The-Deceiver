@@ -1,0 +1,13 @@
+{
+    "asset": "aa51bc65734ffbf498a626d893c4fa42",
+    "fileName": "019a03e8-16e3-7068-958b-aa7a482c4b50.wav",
+    "prompt": "Rewarding, majestic, success, bell",
+    "negativePrompt": "long, cartoon, ominous",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "fd726cdae79fe4083227aa1a447ac21d",
+    "duration": 4.205714225769043,
+    "autoTrim": true,
+    "hasReference": true
+}

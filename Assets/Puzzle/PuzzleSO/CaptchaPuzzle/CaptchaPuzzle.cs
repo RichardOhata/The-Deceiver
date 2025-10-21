@@ -25,9 +25,10 @@ public class CaptchaPuzzle : Puzzle
 
     public override void SolvePuzzle()
     {
-        OnDisable();
-        interactTrigger.SetActive(false);
+        base.SolvePuzzle();
         puzzleData.isSolved = true;
+        interactTrigger.SetActive(false);
+        OnDisable();
     }
 
     private void OnEnable()
