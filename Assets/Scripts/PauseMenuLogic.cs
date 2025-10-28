@@ -56,6 +56,7 @@ public class PauseMenuLogic : MonoBehaviour
         pauseMenu.SetActive(isPaused);
         if (isPaused)
         {
+            InputManager.Instance.controls.Player.Disable();
             player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = false;
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
@@ -64,6 +65,7 @@ public class PauseMenuLogic : MonoBehaviour
         }
         else
         {
+            InputManager.Instance.controls.Player.Enable();
             player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = true;
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;

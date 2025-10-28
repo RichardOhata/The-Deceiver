@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class InvisibleBridgePuzzle : Puzzle
 {
-    [SerializeField] private Collider invisibleCollider;
-    [SerializeField] private GameObject backwardsAnchor;
-    [SerializeField] private Transform playerCamera;
-    [SerializeField] private float backwardsAngleThreshold = 90f;
 
+    [SerializeField] private GameObject eyeSymbol;
+    [SerializeField] private GameObject invisibleBridge;
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private float maxAngle = 10f;
+    [SerializeField] private bool isActive = false;
     public override void StartPuzzle()
     {
         base.StartPuzzle();
+        isActive = true;
     }
     public override void SolvePuzzle()
     {
@@ -19,17 +21,21 @@ public class InvisibleBridgePuzzle : Puzzle
 
     private void Update()
     {
-        if (IsLookingBackwards())
-            invisibleCollider.isTrigger = false;
-        else
-            invisibleCollider.isTrigger = true;
+     
+
+          if (IsLookingAtTarget() && isActive)
+        {
+            invisibleBridge.SetActive(true);
+        } else
+        {
+            invisibleBridge.SetActive(false);
+        }
     }
 
-    private bool IsLookingBackwards()
+    private bool IsLookingAtTarget()
     {
-        Vector3 toanchor = (backwardsAnchor.transform.position - playerCamera.position).normalized;
-        Vector3 forward = playerCamera.forward;
-        float angle = Vector3.Angle(forward, toanchor);
-        return angle < backwardsAngleThreshold;
+        Vector3 directionToTarget = (eyeSymbol.transform.position - playerCamera.position).normalized;
+        float angle = Vector3.Angle(playerCamera.forward, directionToTarget);
+        return angle <= maxAngle;
     }
 }
