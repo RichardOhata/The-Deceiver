@@ -14,15 +14,7 @@ public class PuzzleData : ScriptableObject
     public string puzzleName;
     public PuzzleType puzzleType;
     public string hint;
-    public bool isSolved = false;
+  
     //public bool isActive = false;
-
-#if UNITY_EDITOR
-    private void OnEnable()
-    {
-        isSolved = false;
-    }
-    #endif
-
    
 }

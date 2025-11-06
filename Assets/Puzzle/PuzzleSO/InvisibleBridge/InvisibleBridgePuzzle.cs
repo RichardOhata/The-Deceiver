@@ -16,13 +16,10 @@ public class InvisibleBridgePuzzle : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        puzzleData.isSolved = true;
     }
 
     private void Update()
     {
-     
-
           if (IsLookingAtTarget() && isActive)
         {
             invisibleBridge.SetActive(true);

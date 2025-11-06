@@ -921,7 +921,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2915929667891772042}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fcfb77c7761dec4e83e0fe1a6a81d3d, type: 3}
   m_Name: 
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 3145589257482036161}
   - component: {fileID: 7067446077870421142}
   m_Layer: 0
-  m_Name: ExitTrigger
+  m_Name: ExitRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,16 +1126,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
+  gameObjects: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InvisibleBridgePuzzle, Assembly-CSharp
-        m_MethodName: SolvePuzzle
-        m_Mode: 1
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1238,6 +1240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
+  gameObjects: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -2529,7 +2533,7 @@ GameObject:
   - component: {fileID: 617795858308544935}
   - component: {fileID: 248242700257527137}
   m_Layer: 0
-  m_Name: EnterTrigger
+  m_Name: EnterRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2597,6 +2601,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
+  gameObjects:
+  - {fileID: 0}
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -2604,6 +2611,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: CaptchaPuzzle, Assembly-CSharp
         m_MethodName: StartPuzzle
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 248242700257527137}
+        m_TargetAssemblyTypeName: ModularTrigger, Assembly-CSharp
+        m_MethodName: SetGameObjectsActive
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

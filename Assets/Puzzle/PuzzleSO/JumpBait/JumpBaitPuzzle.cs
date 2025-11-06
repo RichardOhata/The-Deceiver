@@ -15,7 +15,6 @@ public class JumpBaitPuzzle : Puzzle
     {
         base.SolvePuzzle();
         jumpTrigger.SetActive(false);
-        puzzleData.isSolved = true;
 
         if (pauseMenuHint != null)
             pauseMenuHint.SetActive(false);

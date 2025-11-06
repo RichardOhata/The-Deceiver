@@ -40,6 +40,10 @@ Transform:
   - {fileID: 5259522161711915128}
   - {fileID: 5598296097188133575}
   - {fileID: 71447464158034084}
+  - {fileID: 8157613601273834479}
+  - {fileID: 5232316530638833005}
+  - {fileID: 3426790137607818992}
+  - {fileID: 1519984506535202704}
   m_Father: {fileID: 9586342909656263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205975227235794233
@@ -1478,7 +1482,7 @@ GameObject:
   - component: {fileID: 3915241035330040476}
   - component: {fileID: 3525532381467684211}
   m_Layer: 0
-  m_Name: ExitTrigger
+  m_Name: ExitRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1546,6 +1550,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles:
+  - {fileID: 0}
+  gameObjects: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -1564,6 +1571,18 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3525532381467684211}
+        m_TargetAssemblyTypeName: ModularTrigger, Assembly-CSharp
+        m_MethodName: SetPuzzlesActive
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 3525532381467684211}
         m_TargetAssemblyTypeName: ModularTrigger, Assembly-CSharp
         m_MethodName: SetInactive
@@ -1645,6 +1664,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
+  gameObjects: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -2666,10 +2687,6 @@ Transform:
   - {fileID: 1670131722948294032}
   - {fileID: 5263007302330849815}
   - {fileID: 123344096620301408}
-  - {fileID: 8157613601273834479}
-  - {fileID: 5232316530638833005}
-  - {fileID: 3426790137607818992}
-  - {fileID: 1519984506535202704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5236300430708862904
@@ -2679,7 +2696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228612970981887456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a52a81451bbd59b4997beef8d2497060, type: 3}
   m_Name: 
@@ -3401,7 +3418,7 @@ GameObject:
   - component: {fileID: 4553437651594333624}
   - component: {fileID: 82933010015350301}
   m_Layer: 0
-  m_Name: EnterTrigger
+  m_Name: EnterRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3469,6 +3486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
+  gameObjects: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -3939,7 +3958,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9586342909656263}
+    m_TransformParent: {fileID: 6216151589232530456}
     m_Modifications:
     - target: {fileID: 5918767844375649385, guid: 385f20cc23162e441ae5d42abb9c170b, type: 3}
       propertyPath: m_LocalScale.x
@@ -3963,7 +3982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5918767844375649385, guid: 385f20cc23162e441ae5d42abb9c170b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.561
+      value: 8.560997
       objectReference: {fileID: 0}
     - target: {fileID: 5918767844375649385, guid: 385f20cc23162e441ae5d42abb9c170b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5455,7 +5474,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9586342909656263}
+    m_TransformParent: {fileID: 6216151589232530456}
     m_Modifications:
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5471,7 +5490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.86129326
+      value: 0.8612933
       objectReference: {fileID: 0}
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalRotation.x
@@ -5479,7 +5498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.5081081
+      value: -0.50810814
       objectReference: {fileID: 0}
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalRotation.z
@@ -5951,7 +5970,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9586342909656263}
+    m_TransformParent: {fileID: 6216151589232530456}
     m_Modifications:
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5963,7 +5982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.46
+      value: 8.459999
       objectReference: {fileID: 0}
     - target: {fileID: 8304736390154670510, guid: 57855d9d32778264289b046ed321b331, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6327,7 +6346,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9586342909656263}
+    m_TransformParent: {fileID: 6216151589232530456}
     m_Modifications:
     - target: {fileID: 3754591512251838071, guid: cdfe6bab6135e494693d1df5041c54f5, type: 3}
       propertyPath: m_Name
@@ -6339,7 +6358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562478178396271821, guid: cdfe6bab6135e494693d1df5041c54f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000023841858
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4562478178396271821, guid: cdfe6bab6135e494693d1df5041c54f5, type: 3}
       propertyPath: m_LocalPosition.z

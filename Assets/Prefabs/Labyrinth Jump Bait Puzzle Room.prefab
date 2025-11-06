@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 4535067702107484378}
   - component: {fileID: 407483318284810093}
   m_Layer: 0
-  m_Name: ExitTrigger
+  m_Name: ExitRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1005,6 +1005,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles:
+  - {fileID: 3434202713806170791}
+  - {fileID: 0}
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -1034,7 +1037,31 @@ MonoBehaviour:
         m_CallState: 2
   onExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 407483318284810093}
+        m_TargetAssemblyTypeName: ModularTrigger, Assembly-CSharp
+        m_MethodName: SetPuzzlesActive
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 407483318284810093}
+        m_TargetAssemblyTypeName: ModularTrigger, Assembly-CSharp
+        m_MethodName: SetPuzzlesInactive
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3112420510964155328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,6 +1632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -2118,7 +2146,7 @@ GameObject:
   - component: {fileID: 6893543243537658029}
   - component: {fileID: 3667703109410532698}
   m_Layer: 0
-  m_Name: EnterTrigger
+  m_Name: EnterRoomTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2186,6 +2214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
   onEnter:
     m_PersistentCalls:
       m_Calls:
@@ -2665,6 +2694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
+  puzzles: []
   onEnter:
     m_PersistentCalls:
       m_Calls:

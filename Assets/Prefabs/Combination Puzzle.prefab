@@ -2919,20 +2919,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3989322589913645617}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92558e139229b2a4095d5803177782e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   puzzleData: {fileID: 11400000, guid: 051b42e16e87ac4468bb756e52b6b565, type: 2}
-  instanceID: 0
+  isSolved: 0
+  instanceID: 1
   combinationComponents:
   - {fileID: 695629278479809323}
   - {fileID: 3905273686353018858}
   - {fileID: 2037146256286290653}
   - {fileID: 2735462866869188645}
   currentComponent: {fileID: 695629278479809323}
-  correctCombination: 06000000020000000700000004000000
+  correctCombination: 
   rightArrow: {fileID: 6067952196299072606}
   downArrow: {fileID: 8192039498030413349}
 --- !u!1 &4128400265397426984
@@ -3976,7 +3977,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: -0.000015258789}
+  m_Center: {x: 0, y: 0, z: 0.00001525879}
 --- !u!1 &5465163770646218099
 GameObject:
   m_ObjectHideFlags: 0

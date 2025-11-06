@@ -15,7 +15,6 @@ public class MultiInputCombinationPuzzle : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        puzzleData.isSolved = true;
     }
     void Start()
     {

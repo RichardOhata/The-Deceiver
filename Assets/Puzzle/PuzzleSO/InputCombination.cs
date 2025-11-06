@@ -31,19 +31,25 @@ public class InputCombination : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        puzzleData.isSolved = true;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (instanceID == PuzzleID.West)
+        switch (instanceID)
         {
-            SetCombination(new List<(int, int)>
-        {
-            (0, 6), 
-            (2, 7)  
-        });
+            case PuzzleID.West:
+                correctCombination = new List<int> { 6, 2, 7, 4 };
+                SetCombination(new List<(int, int)>
+                {
+                    (0, 6),
+                    (2, 7)
+                });
+                break;
+            case PuzzleID.East:
+                correctCombination = new List<int> { 1, 3, 7, 8 };
+                break;
+                
         }
     }
 
@@ -90,12 +96,12 @@ public class InputCombination : Puzzle
 
                 if (hitObject == rightArrow)
                 {
-                    Debug.Log("Looking at right arrow!");
+                
                     RotateCombinationComponent();
                 }
                 else if (hitObject == downArrow)
                 {
-                    Debug.Log("Looking at down arrow!");
+                  
                     MoveNextComponent();
                 }
             }
@@ -162,7 +168,7 @@ public class InputCombination : Puzzle
         if (combinedPlayerInput == combinedCorrectCombo)
         {
             SolvePuzzle();
-            this.enabled = false;
+            enabled = false;
         }
     }
 }

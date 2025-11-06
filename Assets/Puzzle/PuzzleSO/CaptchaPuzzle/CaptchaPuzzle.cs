@@ -27,7 +27,6 @@ public class CaptchaPuzzle : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        puzzleData.isSolved = true;
         interactTrigger.SetActive(false);
         OnDisable();
     }
