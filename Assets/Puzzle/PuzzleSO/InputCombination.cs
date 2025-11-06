@@ -8,7 +8,6 @@ public class InputCombination : Puzzle
         West,
         East,
         North,
-        South
     }
 
     [SerializeField] public PuzzleID instanceID;
@@ -162,14 +161,81 @@ public class InputCombination : Puzzle
     {
         List<int> playerInput = GetCurrentCombination();
 
+        bool isSolved = false;
+        switch (instanceID)
+        {
+            case PuzzleID.West:
+                // Exact match
+                isSolved = IsExactMatch(playerInput, correctCombination);
+                break;
 
-        int combinedPlayerInput = int.Parse(string.Join("", playerInput));
-        int combinedCorrectCombo = int.Parse(string.Join("", correctCombination));
-        if (combinedPlayerInput == combinedCorrectCombo)
+            case PuzzleID.North:
+                // Ascending pattern x < y < z < a
+                isSolved = IsAscending(playerInput);
+                break;
+
+            case PuzzleID.East:
+                // Any permutation (unordered match)
+                isSolved = IsPermutation(playerInput, correctCombination);
+                break;
+
+            default:
+                break;
+        }
+
+        if (isSolved)
         {
             SolvePuzzle();
             enabled = false;
         }
     }
+
+
+    private bool IsExactMatch(List<int> playerInput, List<int> correctCombination)
+    {
+
+        int combinedPlayerInput = int.Parse(string.Join("", playerInput));
+        int combinedCorrectCombo = int.Parse(string.Join("", correctCombination));
+
+        if (combinedPlayerInput == combinedCorrectCombo)
+        {
+            return true;  
+          
+        }
+        return false;
+    }
+
+    private bool IsAscending(List<int> values)
+    {
+        for (int i = 1; i < values.Count; i++)
+        {
+            if (values[i] <= values[i - 1])
+                return false;
+        }
+        return true;
+    }
+
+    private bool IsPermutation(List<int> playerInput, List<int> correct)
+    {
+        if (playerInput.Count != correct.Count)
+            return false;
+
+        // Copy lists so we don't mutate originals
+        var tempInput = new List<int>(playerInput);
+        var tempCorrect = new List<int>(correct);
+
+        // Sort both and compare
+        tempInput.Sort();
+        tempCorrect.Sort();
+
+        for (int i = 0; i < tempInput.Count; i++)
+        {
+            if (tempInput[i] != tempCorrect[i])
+                return false;
+        }
+        return true;
+    }
+
+
 }
 
