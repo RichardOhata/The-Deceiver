@@ -37,7 +37,7 @@ public class SummerEnvironmentArea : Puzzle
     {
         if (labyrinthHidden || !allowHiddenLabyrinth)
             return;
-        if (LookAtUtility.IsLookingAtAny(GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform, notablePoints, maxAngle: 15f, minDistance: 1f))
+        if (LookAtUtility.IsLookingAtAny(GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform, notablePoints, maxAngle: 5f, minDistance: 1f))
         {
             labyrinth.SetActive(false);
             labyrinthHidden = true;
