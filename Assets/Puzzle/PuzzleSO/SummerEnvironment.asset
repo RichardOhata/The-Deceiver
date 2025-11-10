@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8da4b67d0f24fa142affe02ac2e797dc, type: 3}
-  m_Name: MultiInputCombinationPuzzle
+  m_Name: SummerEnvironment
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleData
-  puzzleName: Multi Input Combination Puzzle (Summer)
+  puzzleName: Summer Area
   puzzleType: 3
   hint: 
-  isSolved: 0

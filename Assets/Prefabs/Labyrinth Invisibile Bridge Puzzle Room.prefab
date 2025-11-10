@@ -493,6 +493,133 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1252771628292869392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781204347394795004}
+  - component: {fileID: 250604846627566517}
+  - component: {fileID: 1113804834970114383}
+  m_Layer: 0
+  m_Name: Eye Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &781204347394795004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252771628292869392}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.080200195}
+  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5259522161711915128}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &250604846627566517
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252771628292869392}
+  m_Enabled: 1
+  serializedVersion: 11
+  m_Type: 2
+  m_Color: {r: 0.9433962, g: 0.89111555, b: 0.539, a: 0.65882355}
+  m_Intensity: 0
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0.25
+  m_ColorTemperature: 7156
+  m_UseColorTemperature: 1
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
+--- !u!114 &1113804834970114383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252771628292869392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &1295480345457867514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,6 +2179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2732351112021991760}
+  - component: {fileID: 3412782503414846482}
   m_Layer: 0
   m_Name: InvisibleBridge
   m_TagString: Untagged
@@ -2093,6 +2221,27 @@ Transform:
   - {fileID: 4869466134007227523}
   m_Father: {fileID: 7658306693432599863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3412782503414846482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4161401055076081716}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.932542, y: 1, z: 11.786686}
+  m_Center: {x: -0.16148531, y: 0, z: 1.2058468}
 --- !u!1 &4469467979430457622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,7 +2718,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 5.087, z: -8.73}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 781204347394795004}
   m_Father: {fileID: 6216151589232530456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8145250457206070032
@@ -2702,11 +2852,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvisibleBridgePuzzle
   puzzleData: {fileID: 11400000, guid: 349d47c21ce98ac4287ec757931c3e75, type: 2}
+  isSolved: 0
   eyeSymbol: {fileID: 5923176908306680999}
   invisibleBridge: {fileID: 4161401055076081716}
   playerCamera: {fileID: 0}
   maxAngle: 10
-  isActive: 0
+  eyeLight: {fileID: 250604846627566517}
+  intensitySpeed: 0.95
 --- !u!1 &6690312107064006019
 GameObject:
   m_ObjectHideFlags: 0
@@ -3570,6 +3722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3693,6 +3849,10 @@ PrefabInstance:
     - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4078,6 +4238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4099,6 +4263,10 @@ PrefabInstance:
     - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_Name
       value: P_Plank_03_Summer (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4388,6 +4556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4600,6 +4772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_03_Summer (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.09
@@ -4723,6 +4899,10 @@ PrefabInstance:
     - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_Name
       value: P_Plank_03_Summer (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5108,6 +5288,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_03_Summer (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.09
@@ -5356,6 +5540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_03_Summer (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.62
@@ -5417,6 +5605,10 @@ PrefabInstance:
     - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_Name
       value: P_Plank_03_Summer (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5728,6 +5920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_03_Summer (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.6200002
@@ -5829,6 +6025,10 @@ PrefabInstance:
     - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6078,6 +6278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6099,6 +6303,10 @@ PrefabInstance:
     - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_Name
       value: P_Plank_03_Summer (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6330,6 +6538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6454,6 +6666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6515,6 +6731,10 @@ PrefabInstance:
     - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6578,6 +6798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plank_Group_01_Summer (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7550460632116965290, guid: aa2dc34f37f926444ade783b7351b0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6599,6 +6823,10 @@ PrefabInstance:
     - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_Name
       value: P_Plank_03_Summer (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769414030689905438, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253076467725201828, guid: d3b33ea152b307846b26d769e8ee161f, type: 3}
       propertyPath: m_LocalPosition.x

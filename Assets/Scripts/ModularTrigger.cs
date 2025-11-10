@@ -10,12 +10,10 @@ public class ModularTrigger : MonoBehaviour
     [SerializeField] private Puzzle[] puzzles;
     [SerializeField] private GameObject[] gameObjects;
 
-
     [Header("Events")]
     public UnityEvent onEnter; // Called when target enters
     public UnityEvent onExit;  // Called when target exits
 
-   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -97,4 +95,6 @@ public class ModularTrigger : MonoBehaviour
         }
 
     }
+
+    
 }

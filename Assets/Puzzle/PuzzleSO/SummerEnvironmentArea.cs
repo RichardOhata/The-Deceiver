@@ -2,11 +2,17 @@ using NUnit.Framework;
 using System;
 using UnityEngine;
 
-public class MultiInputCombinationPuzzle : Puzzle
+public class SummerEnvironmentArea : Puzzle
 {
     [SerializeField] private InputCombination[] inputCombinationPuzzles;
     [SerializeField] private GameObject[] flowers;
+    [SerializeField] private GameObject[] terrainObjects;
+    [SerializeField] private GameObject[] notablePoints;
+    [SerializeField] private GameObject labyrinth;
+    [SerializeField] private bool labyrinthHidden = false;
+    [SerializeField] private bool allowHiddenLabyrinth = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -25,8 +31,17 @@ public class MultiInputCombinationPuzzle : Puzzle
                 puzzle.OnComponentRotated += ChangeEnvironment;
             }
         }
-        //puzzle.OnComponentRotated += CheckSolutionProximity;
-   
+    }
+
+    private void Update()
+    {
+        if (labyrinthHidden || !allowHiddenLabyrinth)
+            return;
+        if (LookAtUtility.IsLookingAtAny(GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform, notablePoints, maxAngle: 15f, minDistance: 1f))
+        {
+            labyrinth.SetActive(false);
+            labyrinthHidden = true;
+        }
     }
 
     private void ChangeEnvironment(InputCombination inputCombination)
@@ -42,9 +57,9 @@ public class MultiInputCombinationPuzzle : Puzzle
         }
     }
 
-    private void CheckSolutionProximity()
+    public void AllowHiddenLabyrinth()
     {
-        Debug.Log("Checking how close the combination is to the solution...");
+        allowHiddenLabyrinth = true;
     }
 
 }
