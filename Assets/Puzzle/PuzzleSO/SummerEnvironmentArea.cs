@@ -11,7 +11,10 @@ public class SummerEnvironmentArea : Puzzle
     [SerializeField] private GameObject labyrinth;
     [SerializeField] private bool labyrinthHidden = false;
     [SerializeField] private bool allowHiddenLabyrinth = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] private GameObject invisibleWaterVolume;
+    [SerializeField] private GameObject invisibleFences;
+    [SerializeField] private GameObject invisibleBounds;
 
     public override void StartPuzzle()
     {
@@ -41,6 +44,9 @@ public class SummerEnvironmentArea : Puzzle
         {
             labyrinth.SetActive(false);
             labyrinthHidden = true;
+            invisibleFences.SetActive(true);
+            invisibleWaterVolume.SetActive(true);
+            invisibleBounds.SetActive(true);
         }
     }
 
