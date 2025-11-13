@@ -17,11 +17,11 @@ public class CaptchaPuzzle : Puzzle
     private GameObject player;
 
     [SerializeField] private GameObject slidingDoor;
+    [SerializeField] private GameObject monitor;
     public override void StartPuzzle()
     {
         base.StartPuzzle();
         player = GameObject.FindGameObjectWithTag("Player");
-        captchaUI.GetComponent<CaptchaUI>().SetExtraChar('!');
     }
 
     public override void SolvePuzzle()
@@ -63,6 +63,7 @@ public class CaptchaPuzzle : Puzzle
         if (!captchaUI.gameObject.activeSelf && IsPlayerNearConsole())
             {
                 captchaUI.SetActive(true);
+                InputManager.Instance.controls.Player.Disable();
                 player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = false;
                 player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
                 Cursor.lockState = CursorLockMode.None;
@@ -81,6 +82,7 @@ public class CaptchaPuzzle : Puzzle
     public void CloseCaptcha()
     {
         captchaUI.SetActive(false);
+        InputManager.Instance.controls.Player.Enable();
         player.GetComponentInChildren<FirstPersonLook>().enabled = true;
         player.GetComponentInChildren<FirstPersonAudio>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -94,11 +96,12 @@ public class CaptchaPuzzle : Puzzle
         switch (stage)
         {
             case 2:
-                captchaUI.GetComponent<CaptchaUI>().SetExtraChar('.');
-                puzzleText.GetComponent<TextMeshPro>().text = "Solve the 'Captcha.'";
+                captchaUI.GetComponent<CaptchaUI>().SetExtraChar('!');
+                puzzleText.GetComponent<TextMeshPro>().text = "Solve the Captcha !";
                 break;
             case 3:
-                captchaUI.GetComponent<CaptchaUI>().SetExtraChar('\0');
+                captchaUI.GetComponent<CaptchaUI>().SetExtraChar('.');
+                puzzleText.SetActive(false);
                 hiddenUIText.SetActive(true);
                 break;
 
@@ -106,6 +109,7 @@ public class CaptchaPuzzle : Puzzle
                 SolvePuzzle();
                 PauseMenuLogic.Instance.HandlePause();
                 captchaUI.SetActive(false);
+                monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
                 slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
                 slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
                 return;
