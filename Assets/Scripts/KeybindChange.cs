@@ -5,32 +5,68 @@ using UnityEngine.InputSystem;
 public class KeybindChange : MonoBehaviour
 {
     [SerializeField] private InputActionReference actionToRebind;
-    private string originalBindingPath;
+    [SerializeField] private string actionName;
+    [SerializeField] private string originalBindingPath;
+    [SerializeField] private string newBinding;
 
-    public void RebindKey()
+    //public void RebindKey()
+    //{
+    //    actionToRebind.action.ApplyBindingOverride(0, "<Keyboard>/f");
+
+
+
+    //    actionToRebind.action.Enable();
+
+    //    Debug.Log($"Temporarily rebound {actionToRebind.action.name} to F");
+    //}
+
+    //public void RebindJumpToF()
+    //{
+    //    var jumpAction = InputManager.Instance.controls.Player.Jump;
+    //    jumpAction.ApplyBindingOverride("<Keyboard>/f");
+    //    Debug.Log("Jump rebound to F");
+    //}
+
+    //public void RebindJumpToSpace()
+    //{
+    //    var jumpAction = InputManager.Instance.controls.Player.Jump;
+    //    jumpAction.ApplyBindingOverride("<Keyboard>/space");
+    //    Debug.Log("Jump rebound to Space");
+    //}
+
+    public void RebindAction()
     {
-        actionToRebind.action.ApplyBindingOverride(0, "<Keyboard>/f");
-   
+        var controls = InputManager.Instance.controls;
+        var playerMap = controls.Player.Get();
 
-      
-        actionToRebind.action.Enable();
+        var action = playerMap.FindAction(actionName);
+        if (action == null)
+        {
+            Debug.LogWarning($"[KeybindChange] Could not find action '{actionName}' in Player map!");
+            return;
+        }
 
-        Debug.Log($"Temporarily rebound {actionToRebind.action.name} to F");
+        action.ApplyBindingOverride(newBinding);
+        Debug.Log($"[KeybindChange] '{actionName}' rebound to {newBinding}");
     }
 
-    public void RebindJumpToF()
+    /// <summary>
+    /// Reset all binding overrides for the given action.
+    /// </summary>
+    public void ResetBinding()
     {
-        var jumpAction = InputManager.Instance.controls.Player.Jump;
-        jumpAction.ApplyBindingOverride("<Keyboard>/f");
-        Debug.Log("Jump rebound to F");
+        var controls = InputManager.Instance.controls;
+        var playerMap = controls.Player.Get();
+
+        var action = playerMap.FindAction(actionName);
+        if (action == null)
+        {
+            Debug.LogWarning($"[KeybindChange] Could not find action '{actionName}' in Player map!");
+            return;
+        }
+
+        action.ApplyBindingOverride(originalBindingPath);
+        Debug.Log($"[KeybindChange] '{actionName}' rebound to {newBinding}");
+
     }
-
-    public void RebindJumpToSpace()
-    {
-        var jumpAction = InputManager.Instance.controls.Player.Jump;
-        jumpAction.ApplyBindingOverride("<Keyboard>/space");
-        Debug.Log("Jump rebound to Space");
-    }
-
-
 }

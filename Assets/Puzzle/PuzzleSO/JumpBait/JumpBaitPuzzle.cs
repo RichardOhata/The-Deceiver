@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class JumpBaitPuzzle : Puzzle
@@ -5,6 +6,8 @@ public class JumpBaitPuzzle : Puzzle
     [SerializeField]
     private GameObject jumpTrigger;
     [SerializeField] private GameObject pauseMenuHint;
+    [SerializeField] private GameObject jumpUITrigger;
+
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -18,5 +21,15 @@ public class JumpBaitPuzzle : Puzzle
 
         if (pauseMenuHint != null)
             pauseMenuHint.SetActive(false);
+    }
+
+   public void HasDied()
+    {
+         jumpUITrigger.GetComponent<UIUpdate>().SetText("? to Jump");
+    }
+
+    public void UpdatePauseHint()
+    {
+        pauseMenuHint.GetComponent<TextMeshProUGUI>().text = "E";
     }
 }
