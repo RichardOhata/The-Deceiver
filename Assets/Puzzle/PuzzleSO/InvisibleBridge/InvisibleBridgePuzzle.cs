@@ -7,7 +7,7 @@ public class InvisibleBridgePuzzle : Puzzle
     [SerializeField] private GameObject invisibleBridge;
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float maxAngle = 10f;
-   
+
     [SerializeField] private Light eyeLight;
     private float maxIntensity = 1.0f;
     [SerializeField] private float intensitySpeed = 0.9f;
@@ -23,7 +23,7 @@ public class InvisibleBridgePuzzle : Puzzle
     private void Update()
     {
         bool looking = LookAtUtility.IsLookingAt(playerCamera, eyeSymbol.transform, maxAngle);
-        invisibleBridge.SetActive(looking); 
+        invisibleBridge.SetActive(looking);
         LightUp(looking);
     }
 
@@ -35,5 +35,14 @@ public class InvisibleBridgePuzzle : Puzzle
             targetIntensity,
             intensitySpeed * Time.deltaTime
         );
+    }
+
+    private void OnDisable()
+    {
+
+        if (eyeLight != null)
+        {
+            eyeLight.intensity = 0f;
+        }
     }
 }

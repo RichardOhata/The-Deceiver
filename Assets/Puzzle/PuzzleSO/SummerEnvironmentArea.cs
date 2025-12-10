@@ -16,6 +16,8 @@ public class SummerEnvironmentArea : Puzzle
     [SerializeField] private GameObject invisibleFences;
     [SerializeField] private GameObject invisibleBounds;
 
+    [SerializeField] private GameObject hiddenLabyrinthCheck;
+
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -47,6 +49,7 @@ public class SummerEnvironmentArea : Puzzle
             invisibleFences.SetActive(true);
             invisibleWaterVolume.SetActive(true);
             invisibleBounds.SetActive(true);
+            Destroy(hiddenLabyrinthCheck);
         }
     }
 
@@ -63,9 +66,9 @@ public class SummerEnvironmentArea : Puzzle
         }
     }
 
-    public void AllowHiddenLabyrinth()
+    public void AllowHiddenLabyrinth(bool allow)
     {
-        allowHiddenLabyrinth = true;
+        allowHiddenLabyrinth = allow;
     }
 
 }
