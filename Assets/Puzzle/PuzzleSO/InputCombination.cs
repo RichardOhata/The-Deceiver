@@ -48,7 +48,10 @@ public class InputCombination : Puzzle
             case PuzzleID.East:
                 correctCombination = new List<int> { 1, 3, 7, 8 };
                 break;
-                
+            case PuzzleID.North:
+                correctCombination = new List<int> { 2, 1, 4, 3 };
+                break;
+
         }
     }
 
@@ -170,8 +173,7 @@ public class InputCombination : Puzzle
                 break;
 
             case PuzzleID.North:
-                // Ascending pattern x < y < z < a
-                isSolved = IsAscending(playerInput);
+                isSolved = IsExactMatch(playerInput, correctCombination);
                 break;
 
             case PuzzleID.East:
