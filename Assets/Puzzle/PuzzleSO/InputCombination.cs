@@ -22,6 +22,8 @@ public class InputCombination : Puzzle
     [SerializeField] private GameObject downArrow;
 
     public event System.Action<InputCombination> OnComponentRotated;
+
+    [SerializeField] private AreaManager areaManager;
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -30,6 +32,7 @@ public class InputCombination : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
+        areaManager.GetComponent<AreaManager>().OnPuzzleSolved();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

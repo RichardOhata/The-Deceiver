@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   puzzleData: {fileID: 11400000, guid: 051b42e16e87ac4468bb756e52b6b565, type: 2}
   isSolved: 0
-  instanceID: 1
+  instanceID: 0
   combinationComponents:
   - {fileID: 695629278479809323}
   - {fileID: 3905273686353018858}
@@ -2936,6 +2936,7 @@ MonoBehaviour:
   correctCombination: 
   rightArrow: {fileID: 6067952196299072606}
   downArrow: {fileID: 8192039498030413349}
+  areaManager: {fileID: 0}
 --- !u!1 &4128400265397426984
 GameObject:
   m_ObjectHideFlags: 0

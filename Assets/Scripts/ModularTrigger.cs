@@ -96,5 +96,42 @@ public class ModularTrigger : MonoBehaviour
 
     }
 
-    
+    /// <summary>
+    /// Enables ONLY scripts (MonoBehaviours) on the object.
+    /// Does NOT enable Colliders, Lights, Audio, or Renderers.
+    /// </summary>
+    public void SetScriptsEnabled(int index = -1)
+    {
+        if (gameObjects == null || gameObjects.Length == 0) return;
+
+        if (index < 0)
+        {
+            foreach (GameObject obj in gameObjects)
+            {
+                if (obj != null) EnableScriptsInternal(obj);
+            }
+        }
+        else if (index < gameObjects.Length)
+        {
+            GameObject obj = gameObjects[index];
+            if (obj != null) EnableScriptsInternal(obj);
+        }
+    }
+
+    private void EnableScriptsInternal(GameObject target)
+    {
+        // GetComponents<MonoBehaviour> grabs custom scripts and some Unity logic (like NavMeshAgents).
+        // It EXCLUDES Colliders, Renderers, Lights, AudioSources, and Animation components.
+        MonoBehaviour[] scripts = target.GetComponents<MonoBehaviour>();
+
+        foreach (MonoBehaviour mb in scripts)
+        {
+            // Optional: prevent this script from disabling itself if it's on the same object
+            if (mb != this)
+            {
+                mb.enabled = true;
+            }
+        }
+    }
+
 }
