@@ -1,72 +1,62 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class KeybindChange : MonoBehaviour
 {
-    [SerializeField] private InputActionReference actionToRebind;
-    [SerializeField] private string actionName;
-    [SerializeField] private string originalBindingPath;
-    [SerializeField] private string newBinding;
-
-    //public void RebindKey()
-    //{
-    //    actionToRebind.action.ApplyBindingOverride(0, "<Keyboard>/f");
-
-
-
-    //    actionToRebind.action.Enable();
-
-    //    Debug.Log($"Temporarily rebound {actionToRebind.action.name} to F");
-    //}
-
-    //public void RebindJumpToF()
-    //{
-    //    var jumpAction = InputManager.Instance.controls.Player.Jump;
-    //    jumpAction.ApplyBindingOverride("<Keyboard>/f");
-    //    Debug.Log("Jump rebound to F");
-    //}
-
-    //public void RebindJumpToSpace()
-    //{
-    //    var jumpAction = InputManager.Instance.controls.Player.Jump;
-    //    jumpAction.ApplyBindingOverride("<Keyboard>/space");
-    //    Debug.Log("Jump rebound to Space");
-    //}
-
-    public void RebindAction()
+    [System.Serializable]
+    public struct BindingOverride
     {
-        var controls = InputManager.Instance.controls;
-        var playerMap = controls.Player.Get();
-
-        var action = playerMap.FindAction(actionName);
-        if (action == null)
-        {
-            Debug.LogWarning($"[KeybindChange] Could not find action '{actionName}' in Player map!");
-            return;
-        }
-
-        action.ApplyBindingOverride(newBinding);
-        Debug.Log($"[KeybindChange] '{actionName}' rebound to {newBinding}");
+        public string actionName;    // e.g. "Move"
+        public int bindingIndex;     // e.g. 1 (Up), 2 (Down), 3 (Left), 4 (Right)...
+        public string newBinding;    // e.g. "<Keyboard>/f"
     }
 
-    /// <summary>
-    /// Reset all binding overrides for the given action.
-    /// </summary>
-    public void ResetBinding()
+    [Header("Configuration")]
+    // This creates a collapsible list in the Inspector
+    [SerializeField] private List<BindingOverride> bindingsToChange;
+
+    public void RebindAll()
     {
         var controls = InputManager.Instance.controls;
         var playerMap = controls.Player.Get();
 
-        var action = playerMap.FindAction(actionName);
-        if (action == null)
+        foreach (var bind in bindingsToChange)
         {
-            Debug.LogWarning($"[KeybindChange] Could not find action '{actionName}' in Player map!");
-            return;
+            InputAction action = playerMap.FindAction(bind.actionName);
+
+            if (action == null)
+            {
+                Debug.LogWarning($"[KeybindChange] Action '{bind.actionName}' not found!");
+                continue;
+            }
+
+            // Apply the override
+            action.ApplyBindingOverride(bind.bindingIndex, bind.newBinding);
+            Debug.Log($"Rebound {bind.actionName} [{bind.bindingIndex}] to {bind.newBinding}");
         }
+    }
 
-        action.ApplyBindingOverride(originalBindingPath);
-        Debug.Log($"[KeybindChange] '{actionName}' rebound to {newBinding}");
+    public void ResetAll()
+    {
+        var controls = InputManager.Instance.controls;
+        var playerMap = controls.Player.Get();
 
+        foreach (var bind in bindingsToChange)
+        {
+            InputAction action = playerMap.FindAction(bind.actionName);
+            if (action != null)
+            {
+                action.RemoveBindingOverride(bind.bindingIndex);
+            }
+        }
+        Debug.Log("[KeybindChange] All bindings reset to default.");
+    }
+
+    // Safety check: Reset when this object is turned off/destroyed
+    private void OnDisable()
+    {
+        ResetAll();
     }
 }

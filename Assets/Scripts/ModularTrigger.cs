@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class ModularTrigger : MonoBehaviour
 {
@@ -134,4 +135,15 @@ public class ModularTrigger : MonoBehaviour
         }
     }
 
+    public void DisableInput(string actionName)
+    {
+        if (InputManager.Instance != null)
+            InputManager.Instance.SetActionState(actionName, false);
+    }
+
+    public void EnableInput(string actionName)
+    {
+        if (InputManager.Instance != null)
+            InputManager.Instance.SetActionState(actionName, true);
+    }
 }
