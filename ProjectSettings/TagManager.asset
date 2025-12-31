@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Captcha Puzzle
   - PauseMenu
+  - bullet
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,10 @@ public class PauseMenuLogic : MonoBehaviour
 {
     [SerializeField]
     private GameObject pauseMenu;
+
+    [SerializeField]
+    private GameObject settingsMenu;
+
     private bool isPaused = false;
 
     private GameObject player;
@@ -73,6 +77,21 @@ public class PauseMenuLogic : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
+    public void SettingsTransition()
+    {
+        pauseMenu.gameObject.SetActive(false);
+        settingsMenu.gameObject.SetActive(true);
+    }
+
+    public void PauseMenuTransition()
+    {
+        pauseMenu.gameObject.SetActive(true);
+        settingsMenu.gameObject.SetActive(false);
+    }
+
+
+
     public void MainMenu()
     {
         Time.timeScale = 1f;
