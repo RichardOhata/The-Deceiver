@@ -51,7 +51,6 @@ public class KeybindChange : MonoBehaviour
                 action.RemoveBindingOverride(bind.bindingIndex);
             }
         }
-        Debug.Log("[KeybindChange] All bindings reset to default.");
     }
 
     // Safety check: Reset when this object is turned off/destroyed

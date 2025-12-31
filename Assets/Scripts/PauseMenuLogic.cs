@@ -16,6 +16,9 @@ public class PauseMenuLogic : MonoBehaviour
 
     public static PauseMenuLogic Instance { get; private set; }
 
+
+    private bool falseEnableJump = false;
+
     private void Awake()
     {
         Instance = this;
@@ -54,12 +57,23 @@ public class PauseMenuLogic : MonoBehaviour
             return; // stop further processing
         }
 
+        if (settingsMenu.activeSelf == true)
+        {
+            settingsMenu.SetActive(false);
+            pauseMenu.SetActive(true);
+            return;
+        }
 
 
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
+        
         if (isPaused)
         {
+            if (!InputManager.Instance.controls.Player.Jump.enabled)
+            {
+                falseEnableJump = true;
+            }
             InputManager.Instance.controls.Player.Disable();
             player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = false;
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
@@ -69,7 +83,13 @@ public class PauseMenuLogic : MonoBehaviour
         }
         else
         {
+           
             InputManager.Instance.controls.Player.Enable();
+            if (falseEnableJump)
+            {
+                InputManager.Instance.controls.Player.Jump.Disable();
+            }
+            falseEnableJump = false;
             player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = true;
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;

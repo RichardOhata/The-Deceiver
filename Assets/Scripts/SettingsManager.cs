@@ -1,3 +1,4 @@
+using Unity.AppUI.UI;
 using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
@@ -22,7 +23,7 @@ public class SettingsManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(this.gameObject); 
+        DontDestroyOnLoad(this); 
 
         LoadSettings(); 
     }
@@ -56,6 +57,7 @@ public class SettingsManager : MonoBehaviour
         if (reticleObject != null)
         {
             reticleObject.SetActive(isOn);
+            reticle = (isOn == true ? 1 : 0);
             PlayerPrefs.SetInt("Reticle", isOn ? 1 : 0);
         }
     }
@@ -75,6 +77,6 @@ public class SettingsManager : MonoBehaviour
             Camera.main.fieldOfView = fov;
 
 
-        GameObject.FindGameObjectWithTag("Reticle").SetActive(reticle == 1 ? true : false);
+        reticleObject.SetActive(reticle == 1 ? true : false);
     }
 }
