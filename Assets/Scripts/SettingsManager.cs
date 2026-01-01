@@ -62,16 +62,25 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    public void SetSmoothing(float newVal)
+    {
+        smoothing = newVal;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().smoothing = newVal;
+        PlayerPrefs.SetFloat("Smoothing", newVal);
+    }
+
     private void LoadSettings()
     {
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 0.2f);
         fov = PlayerPrefs.GetFloat("FOV", 60.0f);
         volume = PlayerPrefs.GetFloat("Volume", 0.75f);
         reticle = PlayerPrefs.GetInt("Reticle", 0);
+        smoothing = PlayerPrefs.GetFloat("Smoothing", 2.0f);
 
         AudioListener.volume = volume;
 
         GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().sensitivity = sensitivity;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().smoothing = smoothing;
 
         if (Camera.main != null)
             Camera.main.fieldOfView = fov;

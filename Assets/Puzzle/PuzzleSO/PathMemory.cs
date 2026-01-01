@@ -11,10 +11,4 @@ public class PathMemory : Puzzle
     {
         base.SolvePuzzle();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
