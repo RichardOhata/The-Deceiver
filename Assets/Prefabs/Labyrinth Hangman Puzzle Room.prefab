@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
   targetTag: Player
   puzzles:
-  - {fileID: 0}
+  - {fileID: 2858689830962843011}
   gameObjects: []
   onEnter:
     m_PersistentCalls:
@@ -849,6 +849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9043387401228232614}
+  - component: {fileID: 2858689830962843011}
   m_Layer: 0
   m_Name: Labyrinth Hangman Puzzle Room
   m_TagString: Captcha Puzzle
@@ -881,6 +882,25 @@ Transform:
   - {fileID: 2666932868311625525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2858689830962843011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915929667891772042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a7ee3a14fbd6046a2e55489dcfc9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hangman
+  puzzleData: {fileID: 11400000, guid: 5b7668f30eac85f4f9a232fdb4515b9d, type: 2}
+  isSolved: 0
+  interactTrigger: {fileID: 3670105130860193890}
+  hangmanUI: {fileID: 0}
+  captchaConsole: {fileID: 2409066861054241811}
+  slidingDoor: {fileID: 8587648794017336844}
+  monitor: {fileID: 9085006155211652777}
 --- !u!1 &3169512483224376538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,7 +2125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5756134337208120420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2616,6 +2636,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Fence_06_Summer
       objectReference: {fileID: 0}
+    - target: {fileID: 8093183616880387821, guid: 37312c52e6f88f7449dafe4f8005c61a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8870704997052644439, guid: 37312c52e6f88f7449dafe4f8005c61a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.169
@@ -2718,6 +2742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Fence_07_Summer
       objectReference: {fileID: 0}
+    - target: {fileID: 2085253582969806298, guid: 123c039289d8fab47b2a3237625e87ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2785,6 +2813,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bd716ff01d5f614891a62fb65b96804, type: 3}
+--- !u!1 &8587648794017336844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1405463586173396408, guid: 7bd716ff01d5f614891a62fb65b96804, type: 3}
+  m_PrefabInstance: {fileID: 7254244272926075828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8844670948378019898 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2167029557102748558, guid: 7bd716ff01d5f614891a62fb65b96804, type: 3}
@@ -2862,5 +2895,10 @@ PrefabInstance:
 --- !u!4 &9079424603186155249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4948899196415192, guid: 118d794af50d44affb397ac6d1b6a89b, type: 3}
+  m_PrefabInstance: {fileID: 9084055586739053097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9085006155211652777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1513596015828096, guid: 118d794af50d44affb397ac6d1b6a89b, type: 3}
   m_PrefabInstance: {fileID: 9084055586739053097}
   m_PrefabAsset: {fileID: 0}
