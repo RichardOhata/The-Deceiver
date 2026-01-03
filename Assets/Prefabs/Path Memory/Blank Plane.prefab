@@ -162,3 +162,4 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: fefac45d2d2d2d54c8b84ba34cf61677, type: 2}
   green: {fileID: 2100000, guid: e2bcf4a56028dce48bb19b74d41e1d42, type: 2}
   flag: 1
+  steppedOn: 0

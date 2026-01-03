@@ -18,9 +18,13 @@ public class BlankPlaneLogic : MonoBehaviour
     [SerializeField]
     private CorrectPathFlag flag;
 
+    [SerializeField]
+    public bool steppedOn = false;
+
     public void SetStep()
     {
-        this.gameObject.GetComponent<MeshRenderer>().material = green;
+        gameObject.GetComponent<MeshRenderer>().material = green;
+        steppedOn = true;
         if (flag == CorrectPathFlag.correct)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>().stepAudio.mute = false;
@@ -32,6 +36,7 @@ public class BlankPlaneLogic : MonoBehaviour
 
     public void ResetStatus()
     {
-        this.gameObject.GetComponent<MeshRenderer>().material = blue;
+        gameObject.GetComponent<MeshRenderer>().material = blue;
+        steppedOn = false;
     }
 }
