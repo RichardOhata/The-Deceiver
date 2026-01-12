@@ -5667,6 +5667,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3401599524893026059, guid: e638cd1ea8dbe5a40b4e1686e7920105, type: 3}
+      propertyPath: flag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4095922696353494816, guid: e638cd1ea8dbe5a40b4e1686e7920105, type: 3}
       propertyPath: m_Name
       value: Reset Blank Plane

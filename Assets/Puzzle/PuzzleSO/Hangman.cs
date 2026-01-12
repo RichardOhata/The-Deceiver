@@ -33,13 +33,6 @@ public class Hangman : Puzzle
         OnDisable();
     }
 
-    private void Update()
-    {
-        
-        UnityEngine.Debug.Log(detectedUser);
-
-    }
-
     private void OnEnable()
     {
         InputManager.Instance.controls.Player.Interact.performed += ToggleHangmanUI;
@@ -103,42 +96,29 @@ public class Hangman : Puzzle
     // Code for determining player's full name for surprise factor. This part of the code was helped developed with the use of AI.
     void Start()
     {
-            string basicName = "";
+            string player_name = "";
+            #if UNITY_STANDALONE_WIN
+                player_name = GetWindowsFullName(); // Retrieves window's first name
+            UnityEngine.Debug.Log(player_name);
+            #endif
 
-            // This checks the standard Windows/Mac/Linux environment tags to determine which OS the player is on.
-            string[] envNames = { "USERNAME", "USER", "LOGNAME", "LNAME" };
 
-            foreach (string name in envNames)
+            if (string.IsNullOrEmpty(player_name))
             {
-                basicName = Environment.GetEnvironmentVariable(name);
-               if (!string.IsNullOrEmpty(basicName)) break; 
+                // Check Steam Username through its API
             }
-            detectedUser = basicName;
 
-     
-            
-        #if UNITY_STANDALONE_WIN
-            if (string.IsNullOrEmpty(detectedUser) || detectedUser.Length <= 5)
+            if (string.IsNullOrEmpty(player_name))
             {
-                string fullName = GetWindowsFullName();
+                player_name = System.Environment.UserName;
+        }
 
-            if (!string.IsNullOrEmpty(fullName))
-            {
-                detectedUser = fullName;
-            }
-        }
-#endif
 
-        if (!string.IsNullOrEmpty(detectedUser))
-        {
-            detectedUser = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(detectedUser.ToLower());
-        }
-        else
-        {
-            detectedUser = "Player"; // Final fallback if everything fails
-        }
-        UnityEngine.Debug.Log("The game knows you are: " + detectedUser);
-        }
+
+        detectedUser = !string.IsNullOrEmpty(player_name) ? player_name : "Player";
+
+        hangmanUI.GetComponent<HangmanUI>().PopulateAnswer(detectedUser);
+    }
 
     private string GetWindowsFullName()
     {
@@ -158,13 +138,17 @@ public class Hangman : Puzzle
             {
                 string output = process.StandardOutput.ReadToEnd();
                 // WMIC output usually includes the header "FullName", we strip it out
-                string cleanName = output.Replace("FullName", "").Trim();
-                return cleanName;
+                string cleanName = output.Replace("FullName", "").Trim(); 
+                if (!string.IsNullOrEmpty(cleanName))
+                {
+                    return cleanName.Split(' ')[0];
+                }
+                return string.Empty;
             }
         }
         catch
         {
-            return Environment.UserName; // Last resort fallback
+            return string.Empty; // Last resort fallback
         }
     }
 
