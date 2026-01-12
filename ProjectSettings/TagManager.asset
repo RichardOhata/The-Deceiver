@@ -7,6 +7,7 @@ TagManager:
   - Captcha Puzzle
   - PauseMenu
   - bullet
+  - Hangman Puzzle
   layers:
   - Default
   - TransparentFX

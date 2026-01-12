@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 2858689830962843011}
   m_Layer: 0
   m_Name: Labyrinth Hangman Puzzle Room
-  m_TagString: Captcha Puzzle
+  m_TagString: Hangman Puzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2779,8 +2779,8 @@ MonoBehaviour:
   onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CaptchaPuzzle, Assembly-CSharp
+      - m_Target: {fileID: 2858689830962843011}
+        m_TargetAssemblyTypeName: Hangman, Assembly-CSharp
         m_MethodName: StartPuzzle
         m_Mode: 1
         m_Arguments:
