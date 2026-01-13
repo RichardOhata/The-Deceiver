@@ -96,6 +96,6 @@ public class CaptchaUI : MonoBehaviour {
 
     private void Close()
     {
-        GameObject.FindGameObjectWithTag("Captcha Puzzle").GetComponent<CaptchaPuzzle>().CloseCaptcha();
+        GameObject.FindGameObjectWithTag("Captcha Puzzle").GetComponent<CaptchaPuzzle>().CloseUI();
     }
 } 

@@ -33,7 +33,7 @@ public class HangmanUI : MonoBehaviour
     private int currentIncorrectCount = 0;
 
     [SerializeField]
-    private string[] answerList = {"Hello", "Welcome", "Player", "Are you", "I see you", "Behind you"};
+    private string[] answerList = {"Hello", "Welcome", "Player Name", "Are you", "I see you", "Behind you", "Name", "Who is"};
 
     public void PopulateAnswer(string answer)
     {
@@ -57,7 +57,7 @@ public class HangmanUI : MonoBehaviour
     }
         private void ResetCurrentProgress()
     {
-        for (int i = 0; i < this.answer.Length; i++)
+        for (int i = 0; i < answer.Length; i++)
         {
             if (this.answer[i] == ' ')
             {
@@ -74,11 +74,12 @@ public class HangmanUI : MonoBehaviour
     public void CheckInputChar()
     {
         string input = userInputTextField.text;
+        if (input == "") return;
         char inputChar = input.ToCharArray()[0];
-        if (inputChar == ' ') return;
+      
         bool correctGuess = false;
 
-        if (!currentProgress.Contains(inputChar))
+        if (!currentProgress.Contains(char.ToLower(inputChar)) && !currentProgress.Contains(char.ToUpper(inputChar)))
         {
             for (int index = 0; index < answer.Length; index++)
             {
@@ -130,7 +131,6 @@ public class HangmanUI : MonoBehaviour
 
         StartCoroutine(DelayedAction(1.0f, () =>
         {
-            gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Hangman Puzzle")
                 .GetComponent<Hangman>()
                 .SolvePuzzle();

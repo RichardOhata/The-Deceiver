@@ -18,6 +18,14 @@ public abstract class Puzzle : MonoBehaviour
         PlaySolveSFX();
     }
 
+
+    public virtual bool IsUIOpen => false;
+
+    public virtual void CloseUI()
+    {
+       
+    }
+
     public virtual void ShowHint()
     {
        

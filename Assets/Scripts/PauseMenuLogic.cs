@@ -34,7 +34,6 @@ public class PauseMenuLogic : MonoBehaviour
         InputManager.Instance.controls.UI.Pause.performed += OnPausePerformed;
     }
 
- 
     private void OnDisable()
     {
         InputManager.Instance.controls.UI.Pause.performed -= OnPausePerformed;
@@ -42,20 +41,25 @@ public class PauseMenuLogic : MonoBehaviour
 
     private void OnPausePerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        HandlePause();
+        HandlePause(true);
       
     }
 
-    public void HandlePause()
+    public void HandlePause(bool fromPauseMenu)
     {
-        CaptchaPuzzle captcha = GameObject.FindFirstObjectByType<CaptchaPuzzle>();
-        if (captcha != null && captcha.IsCaptchaOpen)
+        Puzzle[] allPuzzles = GameObject.FindObjectsByType<Puzzle>(FindObjectsSortMode.None);
+        if (fromPauseMenu)
         {
-            isPaused = !isPaused;
-            // Close the captcha instead of pausing
-            captcha.CloseCaptcha();
-            return; // stop further processing
+            foreach (Puzzle puzzle in allPuzzles)
+            {
+                if (puzzle.IsUIOpen)
+                {
+                    puzzle.CloseUI();
+                    return;
+                }
+            }
         }
+    
 
         if (settingsMenu.activeSelf == true)
         {
@@ -66,7 +70,11 @@ public class PauseMenuLogic : MonoBehaviour
 
 
         isPaused = !isPaused;
-        pauseMenu.SetActive(isPaused);
+        if (fromPauseMenu)
+        {
+            pauseMenu.SetActive(isPaused);
+        }
+       
         
         if (isPaused)
         {

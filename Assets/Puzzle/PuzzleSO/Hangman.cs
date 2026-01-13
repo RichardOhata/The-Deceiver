@@ -2,7 +2,6 @@ using UnityEngine;
 
 using System;
 using System.Diagnostics;
-//using System.DirectoryServices.AccountManagement;
 
 // Attempt to find users name, make them do hangman, ask them if this is their actual name, if yes, puzzle solve, if not, ask them to input their real name
 public class Hangman : Puzzle
@@ -29,6 +28,10 @@ public class Hangman : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
+        CloseUI();
+        monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
+        slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
+        slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
         interactTrigger.SetActive(false);
         OnDisable();
     }
@@ -65,33 +68,15 @@ public class Hangman : Puzzle
         if (!hangmanUI.gameObject.activeSelf && IsPlayerNearConsole())
         {
             hangmanUI.SetActive(true);
-            InputManager.Instance.controls.Player.Disable();
-            player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = false;
-            player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0;
+            PauseMenuLogic.Instance.HandlePause(false);
         }
-        else
-        {
-            CloseCaptcha();
-        }
-
     }
-
-    public bool IsHangmanOpen => hangmanUI.activeSelf;
-
-    public void CloseCaptcha()
+    public override bool IsUIOpen => hangmanUI.activeSelf;
+    public override void CloseUI()
     {
         hangmanUI.SetActive(false);
-        InputManager.Instance.controls.Player.Enable();
-        player.GetComponentInChildren<FirstPersonLook>().enabled = true;
-        player.GetComponentInChildren<FirstPersonAudio>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1f;
+        PauseMenuLogic.Instance.HandlePause(false);
     }
-
 
     // Code for determining player's full name for surprise factor. This part of the code was helped developed with the use of AI.
     void Start()

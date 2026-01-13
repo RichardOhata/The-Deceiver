@@ -61,33 +61,18 @@ public class CaptchaPuzzle : Puzzle
         }
 
         if (!captchaUI.gameObject.activeSelf && IsPlayerNearConsole())
-            {
-                captchaUI.SetActive(true);
-                InputManager.Instance.controls.Player.Disable();
-                player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = false;
-                player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Time.timeScale = 0;
-            }
-            else
-            {
-                CloseCaptcha();
-            }
- 
+        {
+            captchaUI.SetActive(true);
+            PauseMenuLogic.Instance.HandlePause(false);
+        }
     }
 
-    public bool IsCaptchaOpen => captchaUI.activeSelf;
+    public override bool IsUIOpen => captchaUI.activeSelf;
 
-    public void CloseCaptcha()
+    public override void CloseUI()
     {
         captchaUI.SetActive(false);
-        InputManager.Instance.controls.Player.Enable();
-        player.GetComponentInChildren<FirstPersonLook>().enabled = true;
-        player.GetComponentInChildren<FirstPersonAudio>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1f;
+        PauseMenuLogic.Instance.HandlePause(false);
     }
 
     public void ProgressPuzzle()
@@ -107,8 +92,7 @@ public class CaptchaPuzzle : Puzzle
 
             case lastStage:
                 SolvePuzzle();
-                PauseMenuLogic.Instance.HandlePause();
-                captchaUI.SetActive(false);
+                CloseUI();
                 monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
                 slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
                 slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
