@@ -13,7 +13,7 @@ public static class LookAtUtility
 
         Vector3 toTarget = target.position - camera.position;
         float distance = toTarget.magnitude;
-
+ 
         // Check distance bounds
         if (distance < minDistance || distance > maxDistance)
             return false;
@@ -63,5 +63,27 @@ public static class LookAtUtility
         return true;
     }
 
+    public static bool IsPointedAt(Camera cam, GameObject target, float minDistance, float maxDistance)
+    {
+        // Create a ray from the center of the screen
+        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        // First, check if the ray hits anything at all within maxDistance
+        Debug.DrawRay(ray.origin, ray.direction * 20.5f, Color.red);
+        if (Physics.Raycast(ray, out hit, maxDistance))
+        {
+            // 1. Check if we hit the correct object
+            if (hit.collider.gameObject == target)
+            {
+                // 2. Check if the hit point is further away than our minDistance
+                if (hit.distance >= minDistance)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

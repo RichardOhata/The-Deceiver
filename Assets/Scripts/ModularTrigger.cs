@@ -97,6 +97,27 @@ public class ModularTrigger : MonoBehaviour
 
     }
 
+    public void SetGameObjectsInActive(int index = -1)
+    {
+        if (gameObjects == null || gameObjects.Length == 0) return;
+        if (index < 0)
+        {
+            foreach (GameObject obj in gameObjects)
+            {
+                if (obj != null)
+                    obj.gameObject.SetActive(false);
+            }
+        }
+        else if (index < gameObjects.Length)
+        {
+
+            GameObject obj = gameObjects[index];
+            if (obj != null)
+                obj.gameObject.SetActive(false);
+        }
+
+    }
+
     /// <summary>
     /// Enables ONLY scripts (MonoBehaviours) on the object.
     /// Does NOT enable Colliders, Lights, Audio, or Renderers.
