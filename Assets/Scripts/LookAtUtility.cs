@@ -70,7 +70,7 @@ public static class LookAtUtility
         RaycastHit hit;
 
         // First, check if the ray hits anything at all within maxDistance
-        Debug.DrawRay(ray.origin, ray.direction * 20.5f, Color.red);
+
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
             // 1. Check if we hit the correct object

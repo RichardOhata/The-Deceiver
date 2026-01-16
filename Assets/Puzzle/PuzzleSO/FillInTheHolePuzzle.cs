@@ -8,6 +8,22 @@ public class FillInTheHolePuzzle : Puzzle
     [SerializeField]
     private GameObject target;
 
+    [SerializeField]
+    private float minDistance = 16f;
+
+    [SerializeField]
+    private float maxDistance = 20.5f;
+
+    [SerializeField]
+    private float counter = 0.0f;
+
+    [SerializeField]
+    private float counterEnd = 0.7f;
+
+
+    [SerializeField]
+    private GameObject reticleCube;
+
     private void Start()
     {
         playerCamera = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
@@ -16,14 +32,14 @@ public class FillInTheHolePuzzle : Puzzle
     public override void StartPuzzle()
     {
         base.StartPuzzle();
-     
-
     }
 
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-      
+        reticleCube.SetActive(true);
+
+        enabled = false;
     }
 
 
@@ -37,33 +53,46 @@ public class FillInTheHolePuzzle : Puzzle
     private void CheckIfLooking()
     {
 
-        // Debugging ray
+      
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Debug.DrawRay(ray.origin, ray.direction * 20.5f, Color.red);
-        float distance = Vector3.Distance(playerCamera.transform.position, target.transform.position);
-        Debug.Log("Distance to Target: " + distance.ToString("F2") + "m");
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 20.5f)) 
+        // For debugging
+        //Debug.DrawRay(ray.origin, ray.direction * 20.5f, Color.red);
+        //float distance = Vector3.Distance(playerCamera.transform.position, target.transform.position);
+        //Debug.Log("Distance to Target: " + distance.ToString("F2") + "m");
+
+        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
         {
-          
-            if (hit.collider.gameObject == target && hit.distance >= 16f)
+
+            Vector3 dirToHoleCenter = (target.transform.position - playerCamera.transform.position).normalized;
+            float alignmentScore = Vector3.Angle(playerCamera.transform.forward, dirToHoleCenter);
+
+            if (hit.collider.gameObject == target && hit.distance >= minDistance && alignmentScore < 0.3f)
             {
-            
-                Vector3 dirToHoleCenter = (target.transform.position - playerCamera.transform.position).normalized;
-                float alignmentScore = Vector3.Angle(playerCamera.transform.forward, dirToHoleCenter);
+                counter += Time.deltaTime;
 
-             
-                if (alignmentScore < 0.3f) // Adjust angle for tweaking precison
+                if (counter >= counterEnd)
                 {
-                    Debug.Log("Yes - Distance and Alignment are Perfect!");
-
-                    // Timer Logic
                     SolvePuzzle();
-                    //Set this component to be inactive
                 }
             }
+            else
+            {
+                counter = 0.0f;
+            }
         }
+        else
+        {
+            counter = 0.0f;
+        }
+    }
 
+    public void ShowReticleCube(bool setActive)
+    {
+        if (isSolved)
+        {
+            reticleCube.SetActive(setActive);
+        }
     }
 
 }
