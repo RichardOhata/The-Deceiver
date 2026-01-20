@@ -14,6 +14,7 @@ public class ModularTrigger : MonoBehaviour
     [Header("Events")]
     public UnityEvent onEnter; // Called when target enters
     public UnityEvent onExit;  // Called when target exits
+    public UnityEvent onStay;
 
 
     private void OnTriggerEnter(Collider other)
@@ -30,6 +31,11 @@ public class ModularTrigger : MonoBehaviour
         {
             onExit?.Invoke();
         }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        onStay?.Invoke();
     }
 
     public void SetInactive()

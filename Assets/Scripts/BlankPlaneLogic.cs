@@ -8,6 +8,14 @@ public class BlankPlaneLogic : MonoBehaviour
     [SerializeField]
     private Material green;
 
+    [SerializeField]
+    private FirstPersonAudio playerAudio; 
+
+    private void Awake()
+    {
+        playerAudio = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>();
+    }
+
     public enum CorrectPathFlag
     {
         correct,
@@ -27,10 +35,10 @@ public class BlankPlaneLogic : MonoBehaviour
         steppedOn = true;
         if (flag == CorrectPathFlag.correct)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>().stepAudio.mute = false;
+            playerAudio.stepAudio.mute = false;
         } else
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>().stepAudio.mute = true;
+            playerAudio.stepAudio.mute = true;
         }
     }
 

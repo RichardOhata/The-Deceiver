@@ -67,7 +67,7 @@ public class FillInTheHolePuzzle : Puzzle
             Vector3 dirToHoleCenter = (target.transform.position - playerCamera.transform.position).normalized;
             float alignmentScore = Vector3.Angle(playerCamera.transform.forward, dirToHoleCenter);
 
-            if (hit.collider.gameObject == target && hit.distance >= minDistance && alignmentScore < 0.3f)
+            if (hit.collider.gameObject == target && hit.distance >= minDistance && alignmentScore < 0.3f && SettingsManager.Instance.reticle == 1)
             {
                 counter += Time.deltaTime;
 
