@@ -6,6 +6,9 @@ public class ReverseMaze : Puzzle
     [SerializeField]
     private FirstPersonAudio playerAudio;
 
+    [SerializeField]
+    private int activeZones = 0;
+
     private void Start()
     {
         playerAudio = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>();
@@ -20,7 +23,14 @@ public class ReverseMaze : Puzzle
     }
 
     public void MuteSteps(bool isMute)
-    {
-        playerAudio.stepAudio.mute = isMute;
+    { 
+        if (isMute)
+        {
+            activeZones++;
+        } else
+        {
+            activeZones = Mathf.Max(0, activeZones - 1);
+        }
+        playerAudio.stepAudio.mute = (activeZones > 0);
     }
 }
