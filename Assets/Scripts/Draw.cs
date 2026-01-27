@@ -7,11 +7,10 @@ public class Draw : MonoBehaviour
     [SerializeField]
     private Camera cam;
 
-    [SerializeField]
-    private int totalXPixels = 512;
-
     private bool userInterpolation = true;
 
+    [SerializeField]
+    private int totalXPixels = 512;
 
     [SerializeField]
     private int totalYPixels = 512;
@@ -21,7 +20,6 @@ public class Draw : MonoBehaviour
 
     [SerializeField]
     private Color brushColor;
-
 
     [SerializeField]
     private Transform topLeftCorner;
@@ -48,11 +46,17 @@ public class Draw : MonoBehaviour
     float xMult;
     float yMult;
 
-    [Header("Maze Textures")]
-    [SerializeField] private Texture2D mazeOutline;
-    [SerializeField] private Texture2D solutionMask;
+    [SerializeField] private Puzzle puzzleScript;
+    [Header("Puzzle Detection")]
+    [SerializeField] private LayerMask startLayer;
+    [SerializeField] private LayerMask safeLayer;
+    [SerializeField] private LayerMask exitLayer;
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask boardLayer;
 
-    private bool isOffPath = false;
+    private bool hasStartedCorrectly = false;
+    public bool isPathValid = true;
+    private bool hasWon = false;
 
     private void Start()
     {
@@ -71,13 +75,26 @@ public class Draw : MonoBehaviour
     private void Update()
     {
         Cursor.lockState = CursorLockMode.None;
+
         if (Input.GetMouseButton(0))
         {
             CalculatePixel();
-        } else
+        }
+        else
         {
+            // --- SINGLE STROKE LOGIC ---
+            // If the player was drawing and lifts the mouse, we reset their progress.
+            if (pressedLastFrame)
+            {
+                Debug.Log("Stroke broken. Resetting puzzle state.");
+                hasStartedCorrectly = false;
+                isPathValid = true; // Ready for a fresh start
+                ResetColor();
+            }
+
             pressedLastFrame = false;
         }
+
     }
 
     private void CalculatePixel()
@@ -85,14 +102,74 @@ public class Draw : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 10f))
+        // 1. Raycast ONLY to the Board layer for smooth position
+        if (Physics.Raycast(ray, out hit, 10f, boardLayer))
         {
             point.position = hit.point;
             xPixel = (int)((point.localPosition.x - topLeftCorner.localPosition.x) * xMult);
             yPixel = (int)((point.localPosition.y - topLeftCorner.localPosition.y) * yMult);
-            Debug.Log("X :" + xPixel + "Y: " + yPixel);
+
+            // Reduced radius to 0.02f for higher precision
+            Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.01f);
+
+            bool currentlyOnValidSurface = false;
+            bool currentlyTouchingWall = false;
+            string wallName = ""; // To store the name of the object that failed us
+
+            foreach (var col in hitColliders)
+            {
+                int colLayer = col.gameObject.layer;
+                int colLayerMask = 1 << colLayer;
+
+                // WALL CHECK
+                if ((colLayerMask & wallLayer) != 0)
+                {
+                    currentlyTouchingWall = true;
+                    wallName = col.gameObject.name; // Capture the name for debugging
+                }
+
+                // SAFE / START / EXIT CHECK
+                if ((colLayerMask & (safeLayer | startLayer | exitLayer)) != 0)
+                {
+                    currentlyOnValidSurface = true;
+                }
+
+                // START TRIGGER
+                if ((colLayerMask & startLayer) != 0 && !hasStartedCorrectly)
+                {
+                    hasStartedCorrectly = true;
+                    isPathValid = true;
+                    Debug.Log("Path Started!");
+                }
+
+                // WIN TRIGGER
+                if ((colLayerMask & exitLayer) != 0 && hasStartedCorrectly && isPathValid && !hasWon)
+                {
+                    hasWon = true;
+                    Debug.Log("Maze Complete!");
+                }
+            }
+
+            // --- FINAL VALIDATION ---
+            if (hasStartedCorrectly && isPathValid)
+            {
+                // PRIORITY 1: If we touched a wall, we fail immediately
+                if (currentlyTouchingWall)
+                {
+                    isPathValid = false;
+                    Debug.Log($"Hit a Wall! Object causing fail: {wallName}");
+                }
+                // PRIORITY 2: If we didn't touch a wall, but we also aren't on any valid surface
+                else if (!currentlyOnValidSurface)
+                {
+                    isPathValid = false;
+                    Debug.Log("Left the Correct Path!");
+                }
+            }
+
             ChangePixelsAroundPoint();
-        } else
+        }
+        else
         {
             pressedLastFrame = false;
         }
@@ -151,5 +228,6 @@ public class Draw : MonoBehaviour
         for (int i = 0; i < colorMap.Length; i++)
             colorMap[i] = Color.white;
         SetTexture();
+        isPathValid = true;
     }
 }

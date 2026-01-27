@@ -15,11 +15,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Maze_Wall
+  - Maze_Start
+  - Maze_End
+  - Maze_Correct
+  - Maze_Board
   - 
   - 
   - 
