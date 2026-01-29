@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections;
 
 public class Draw : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class Draw : MonoBehaviour
     float yMult;
 
     [SerializeField] private Puzzle puzzleScript;
+
     [Header("Puzzle Detection")]
     [SerializeField] private LayerMask startLayer;
     [SerializeField] private LayerMask safeLayer;
@@ -58,9 +60,17 @@ public class Draw : MonoBehaviour
     public bool isPathValid = true;
     private bool hasWon = false;
 
+    [Header("Checkpoint Settings")]
+    private bool hasHitCheckpoint = false;
+    [SerializeField] private LayerMask checkpointLayer;
+    [SerializeField] private bool useCheckpoint = false;
+
+    [Header("Fade Settings")]
+    [SerializeField] private float fadeDuration = 0.5f; // How long the fade takes
+    private Coroutine fadeRoutine;
+
     private void Start()
     {
-        //cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
         colorMap = new Color[totalXPixels * totalYPixels];
         generatedTexture = new Texture2D(totalYPixels, totalXPixels, TextureFormat.RGBA32, false);
         generatedTexture.filterMode = FilterMode.Point;
@@ -74,25 +84,33 @@ public class Draw : MonoBehaviour
 
     private void Update()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
 
         if (Input.GetMouseButton(0))
         {
-            CalculatePixel();
-        }
-        else
-        {
-            // --- SINGLE STROKE LOGIC ---
-            // If the player was drawing and lifts the mouse, we reset their progress.
-            if (pressedLastFrame)
+            if (fadeRoutine != null)
             {
-                Debug.Log("Stroke broken. Resetting puzzle state.");
-                hasStartedCorrectly = false;
-                isPathValid = true; // Ready for a fresh start
+                StopCoroutine(fadeRoutine);
+                fadeRoutine = null;
                 ResetColor();
             }
 
-            pressedLastFrame = false;
+            CalculatePixel();
+        }
+    
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("Mouse released! Resetting puzzle...");
+
+            // Logic to reset the puzzle state
+            hasStartedCorrectly = false;
+            isPathValid = true;
+            pressedLastFrame = false; // Reset this too just in case
+            hasHitCheckpoint = false;
+
+            // Start the visual fade out
+            if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+            fadeRoutine = StartCoroutine(FadeOutStroke());
         }
 
     }
@@ -129,7 +147,7 @@ public class Draw : MonoBehaviour
                 }
 
                 // SAFE / START / EXIT CHECK
-                if ((colLayerMask & (safeLayer | startLayer | exitLayer)) != 0)
+                if ((colLayerMask & (safeLayer | startLayer | exitLayer | checkpointLayer)) != 0)
                 {
                     currentlyOnValidSurface = true;
                 }
@@ -139,27 +157,40 @@ public class Draw : MonoBehaviour
                 {
                     hasStartedCorrectly = true;
                     isPathValid = true;
+                    hasHitCheckpoint = false;
                     Debug.Log("Path Started!");
+                }
+
+                if ((colLayerMask & checkpointLayer) != 0)
+                {
+                    if (hasStartedCorrectly && !hasHitCheckpoint)
+                    {
+                        hasHitCheckpoint = true;
+                        Debug.Log("Checkpoint Reached!");
+                    }
                 }
 
                 // WIN TRIGGER
                 if ((colLayerMask & exitLayer) != 0 && hasStartedCorrectly && isPathValid && !hasWon)
                 {
-                    hasWon = true;
-                    Debug.Log("Maze Complete!");
+                    if (hasHitCheckpoint || !useCheckpoint)
+                    {
+                        hasWon = true;
+                        puzzleScript.SolvePuzzle();
+                        Debug.Log("Maze Complete!");
+                    }
                 }
             }
 
-            // --- FINAL VALIDATION ---
+            // --- FINAL VALIDATION --- Additional Check
             if (hasStartedCorrectly && isPathValid)
             {
-                // PRIORITY 1: If we touched a wall, we fail immediately
+
                 if (currentlyTouchingWall)
                 {
                     isPathValid = false;
                     Debug.Log($"Hit a Wall! Object causing fail: {wallName}");
                 }
-                // PRIORITY 2: If we didn't touch a wall, but we also aren't on any valid surface
                 else if (!currentlyOnValidSurface)
                 {
                     isPathValid = false;
@@ -229,5 +260,41 @@ public class Draw : MonoBehaviour
             colorMap[i] = Color.white;
         SetTexture();
         isPathValid = true;
+    }
+
+
+
+    IEnumerator FadeOutStroke()
+    {
+        float elapsedTime = 0f;
+
+        // 1. Create a copy of the drawn pixels so we know what we are fading FROM
+        Color[] startColors = (Color[])colorMap.Clone();
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fadeDuration; // 0 to 1 value based on time
+
+            // 2. Loop through all pixels and interpolate them towards White
+            // (Note: This loop runs every frame. For 512x512 it should be fine on PC, 
+            // but if it lags, consider lowering resolution or shortening duration)
+            for (int i = 0; i < colorMap.Length; i++)
+            {
+                // Optimization: Only process pixels that aren't already white
+                if (startColors[i] != Color.white)
+                {
+                    // Lerp from the specific drawn color to White
+                    colorMap[i] = Color.Lerp(startColors[i], Color.white, t);
+                }
+            }
+
+            SetTexture(); // Apply changes to the visual texture
+            yield return null; // Wait for the next frame
+        }
+
+        // 3. Ensure it is perfectly clean at the end
+        ResetColor();
+        fadeRoutine = null;
     }
 }

@@ -45,7 +45,7 @@ public class PauseMenuLogic : MonoBehaviour
       
     }
 
-    public void HandlePause(bool fromPauseMenu)
+    public void HandlePause(bool fromPauseMenu, bool stopTime = true, bool lockCursor = false)
     {
         Puzzle[] allPuzzles = GameObject.FindObjectsByType<Puzzle>(FindObjectsSortMode.None);
         if (fromPauseMenu)
@@ -87,7 +87,10 @@ public class PauseMenuLogic : MonoBehaviour
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Time.timeScale = 0;
+            if (stopTime)
+            {
+                Time.timeScale = 0;
+            } 
         }
         else
         {

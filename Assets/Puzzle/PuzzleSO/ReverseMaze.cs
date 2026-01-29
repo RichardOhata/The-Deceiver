@@ -9,6 +9,8 @@ public class ReverseMaze : Puzzle
     [SerializeField]
     private int activeZones = 0;
 
+    [SerializeField]
+    private Drawboard drawBoard;
     private void Start()
     {
         playerAudio = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>();
@@ -32,5 +34,13 @@ public class ReverseMaze : Puzzle
             activeZones = Mathf.Max(0, activeZones - 1);
         }
         playerAudio.stepAudio.mute = (activeZones > 0);
+    }
+
+    public override bool IsUIOpen => drawBoard != null && drawBoard.mazeUIOpen;
+
+    public override void CloseUI()
+    {
+        drawBoard.CloseMazeUI();
+        PauseMenuLogic.Instance.HandlePause(false);
     }
 }

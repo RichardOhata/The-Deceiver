@@ -22,6 +22,11 @@ public class UIUpdate : MonoBehaviour
         uiPanel.SetActive(true);
     }
 
+    public void EnablePanel()
+    {
+        uiPanel.SetActive(true);
+    }
+
     public void DisablePanel()
     {
         uiPanel.SetActive(false);
