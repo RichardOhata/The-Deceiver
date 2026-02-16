@@ -131,8 +131,8 @@ public class HangmanUI : MonoBehaviour
 
         StartCoroutine(DelayedAction(1.0f, () =>
         {
-            GameObject.FindGameObjectWithTag("Hangman Puzzle")
-                .GetComponent<Hangman>()
+            GameObject.FindGameObjectWithTag("ABC Puzzle")
+                .GetComponent<ABCPuzzle>()
                 .SolvePuzzle();
         }));
     }

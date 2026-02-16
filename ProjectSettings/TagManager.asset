@@ -8,6 +8,7 @@ TagManager:
   - PauseMenu
   - bullet
   - Hangman Puzzle
+  - ABC Puzzle
   layers:
   - Default
   - TransparentFX
