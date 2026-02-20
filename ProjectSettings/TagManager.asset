@@ -9,6 +9,7 @@ TagManager:
   - bullet
   - Hangman Puzzle
   - ABC Puzzle
+  - Time Button Puzzle
   layers:
   - Default
   - TransparentFX
