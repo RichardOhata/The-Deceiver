@@ -14,6 +14,7 @@ public class SettingsManager : MonoBehaviour
     public float volume = 0.75f;
     public float smoothing = 2.0f;
     public int reticle = 0;
+    public int displayModeValue = 0;
     private void Awake()
     {
         // Singleton
@@ -67,6 +68,21 @@ public class SettingsManager : MonoBehaviour
         smoothing = newVal;
         GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().smoothing = newVal;
         PlayerPrefs.SetFloat("Smoothing", newVal);
+    }
+
+    public void SetDisplayMode(int value)
+    {
+        displayModeValue = value;
+        PlayerPrefs.SetInt("DisplayMode", value);
+
+        if (value == 0)
+        {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+        else if (value == 1)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
     }
 
     private void LoadSettings()
