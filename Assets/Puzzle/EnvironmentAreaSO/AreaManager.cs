@@ -14,8 +14,11 @@ public class AreaManager : MonoBehaviour
     {
         // Example: Load data from save system
         // _puzzlesSolved = SaveSystem.Load(currentArea.areaID);
-
-        UpdateUI();
+        if (progressionText != null)
+        {
+            UpdateUI();
+        }
+        
     }
 
     public void OnPuzzleSolved()
@@ -26,7 +29,10 @@ public class AreaManager : MonoBehaviour
         if (_puzzlesSolved > currentArea.totalPuzzles)
             _puzzlesSolved = currentArea.totalPuzzles;
 
-        UpdateUI();
+        if (progressionText != null)
+        {
+            UpdateUI();
+        }
 
         if (currentArea.IsAreaComplete(_puzzlesSolved))
         {
