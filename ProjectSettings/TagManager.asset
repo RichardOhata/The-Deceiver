@@ -10,6 +10,7 @@ TagManager:
   - Hangman Puzzle
   - ABC Puzzle
   - Time Button Puzzle
+  - Terrain Puzzle
   layers:
   - Default
   - TransparentFX
