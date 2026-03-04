@@ -4,9 +4,11 @@ public abstract class Puzzle : MonoBehaviour
 {
     public PuzzleData puzzleData;
     public bool isSolved = false;
+    public bool hasStarted = false;
     public virtual void StartPuzzle()
     {
         Debug.Log($"Starting puzzle: {puzzleData.puzzleName}");
+        hasStarted = true;
     }
 
     public virtual void SolvePuzzle()

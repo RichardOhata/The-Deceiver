@@ -3,33 +3,82 @@ using UnityEngine;
 
 public class JumpBaitPuzzle : Puzzle
 {
-    [SerializeField]
-    private GameObject jumpTrigger;
-    [SerializeField] private GameObject pauseMenuHint;
+    [SerializeField] private GameObject jumpTrigger;
+    [SerializeField] private TextMeshProUGUI pauseMenuText;
     [SerializeField] private GameObject jumpUITrigger;
+    [SerializeField] private GameObject firstPlatform;
+    [SerializeField] private GameObject secondPlatform;
+    private bool playerIsInRangeFirst = false;
+    private bool playerIsInRangeSecond = false;
 
     public override void StartPuzzle()
     {
-        base.StartPuzzle();
-        pauseMenuHint.SetActive(true);
-
+        if (!base.hasStarted)
+        {
+            base.StartPuzzle();
+        }
     }
+
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
         jumpTrigger.SetActive(false);
-
-        if (pauseMenuHint != null)
-            pauseMenuHint.SetActive(false);
     }
 
-   public void HasDied()
+    private void Update()
     {
-         jumpUITrigger.GetComponent<UIUpdate>().SetText("? to Jump");
+        if (playerIsInRangeFirst && Input.GetKeyDown(KeyCode.Space))
+        {
+            DisableFirstPlatform();
+        }
+
+        if (playerIsInRangeSecond && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F)))
+        {
+            DisableSecondPlatform();
+        }
+    }
+    public void HasDied()
+    {
+        jumpUITrigger.GetComponent<UIUpdate>().SetText("? to Jump");
+        firstPlatform.SetActive(true);
+        playerIsInRangeFirst = false;
+        secondPlatform.SetActive(true);
+        playerIsInRangeSecond = false;
     }
 
-    public void UpdatePauseHint()
+    public void UpdatePauseMenu(string condition)
     {
-        pauseMenuHint.GetComponent<TextMeshProUGUI>().text = "E";
+        switch (condition)
+        {
+            case "reset":
+                pauseMenuText.text = "PAUSED";
+                break;
+            case "first":
+                pauseMenuText.text = "FAUSED";
+                break;
+            case "second":
+                pauseMenuText.text = "EAUSED";
+                break;
+        }
+    } 
+
+    public void DisableFirstPlatform()
+    {
+        firstPlatform.SetActive(false);
+    }
+
+    public void DisableSecondPlatform()
+    {
+        secondPlatform.SetActive(false);
+    }
+
+    public void SetPlayerInRangeFirst(bool state)
+    {
+        playerIsInRangeFirst = state;
+    }
+
+    public void SetPlayerInRangeSecond(bool state)
+    {
+        playerIsInRangeSecond = state;
     }
 }
