@@ -17,6 +17,10 @@ public class SummerEnvironmentArea : MonoBehaviour
 
     [SerializeField] private GameObject hiddenLabyrinthCheck;
 
+    private void Awake()
+    {
+       
+    }
     void Start()
     {
         foreach (InputCombination puzzle in inputCombinationPuzzles)
@@ -34,12 +38,7 @@ public class SummerEnvironmentArea : MonoBehaviour
             return;
         if (LookAtUtility.IsLookingAtAny(GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform, notablePoints, maxAngle: 5f, minDistance: 1f))
         {
-            labyrinth.SetActive(false);
-            labyrinthHidden = true;
-            invisibleFences.SetActive(true);
-            invisibleWaterVolume.SetActive(true);
-            invisibleBounds.SetActive(true);
-            Destroy(hiddenLabyrinthCheck);
+          HideLabyrinth();
         }
     }
 
@@ -59,6 +58,18 @@ public class SummerEnvironmentArea : MonoBehaviour
     public void AllowHiddenLabyrinth(bool allow)
     {
         allowHiddenLabyrinth = allow;
+    }
+
+    private void HideLabyrinth()
+    {
+        labyrinth.SetActive(false);
+        labyrinthHidden = true;
+        SaveManager.Instance.currentData.environmentData.summerEnvironment.hideLabyrinth = true;
+        SaveManager.Instance.SaveGame();
+        invisibleFences.SetActive(true);
+        invisibleWaterVolume.SetActive(true);
+        invisibleBounds.SetActive(true);
+        Destroy(hiddenLabyrinthCheck);
     }
 
 }

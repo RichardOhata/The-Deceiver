@@ -11,6 +11,13 @@ public class JumpBaitPuzzle : Puzzle
     private bool playerIsInRangeFirst = false;
     private bool playerIsInRangeSecond = false;
 
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.jumpBait.isSolved;
+        }
+    }
     public override void StartPuzzle()
     {
         if (!base.hasStarted)
@@ -25,6 +32,13 @@ public class JumpBaitPuzzle : Puzzle
         jumpTrigger.SetActive(false);
     }
 
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.jumpBait.isSolved = true;
+        SaveManager.Instance.SaveGame();
+        Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
+    }
+
     private void Update()
     {
         if (playerIsInRangeFirst && Input.GetKeyDown(KeyCode.Space))
@@ -37,6 +51,7 @@ public class JumpBaitPuzzle : Puzzle
             DisableSecondPlatform();
         }
     }
+
     public void HasDied()
     {
         jumpUITrigger.GetComponent<UIUpdate>().SetText("? to Jump");

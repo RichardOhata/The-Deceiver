@@ -24,6 +24,25 @@ public class InputCombination : Puzzle
     public event System.Action<InputCombination> OnComponentRotated;
 
     [SerializeField] private AreaManager areaManager;
+
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            switch (instanceID)
+                {
+                    case PuzzleID.West:
+                        isSolved = SaveManager.Instance.currentData.puzzleProgress.combinationWest.isSolved;
+                        break;
+                    case PuzzleID.East:
+                        isSolved = SaveManager.Instance.currentData.puzzleProgress.combinationEast.isSolved;
+                        break;
+                    case PuzzleID.North:
+                        isSolved = SaveManager.Instance.currentData.puzzleProgress.combinationNorth.isSolved;
+                        break;
+                }
+            }
+    }
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -33,6 +52,25 @@ public class InputCombination : Puzzle
     {
         base.SolvePuzzle();
         areaManager.GetComponent<AreaManager>().OnPuzzleSolved();
+    }
+
+    public override void UpdatePuzzleStatus()
+    {
+        switch (instanceID)
+        {
+            case PuzzleID.West:
+                SaveManager.Instance.currentData.puzzleProgress.combinationWest.isSolved = true;
+                break;
+            case PuzzleID.East:
+                SaveManager.Instance.currentData.puzzleProgress.combinationEast.isSolved = true;
+                break;
+            case PuzzleID.North:
+                SaveManager.Instance.currentData.puzzleProgress.combinationNorth.isSolved = true;
+                break;
+        }
+
+        SaveManager.Instance.SaveGame();
+    
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -18,6 +18,29 @@ public class CaptchaPuzzle : Puzzle
 
     [SerializeField] private GameObject slidingDoor;
     [SerializeField] private GameObject monitor;
+
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.captcha.isSolved;
+            stage = SaveManager.Instance.currentData.puzzleProgress.captcha.stage;
+            UpdateCaptchaAnswer();
+        }
+    }
+
+    private void Start()
+    {
+        if (isSolved)
+        {
+            slidingDoor.GetComponent<Animator>().Play("OpenSlidingDoor", 0, 1f);
+            interactTrigger.SetActive(false);
+            monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
+            puzzleText.SetActive(false);
+            hiddenUIText.SetActive(true);
+        }
+    }
+
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -42,6 +65,16 @@ public class CaptchaPuzzle : Puzzle
         InputManager.Instance.controls.Player.Interact.performed -= ToggleCaptchaUI;
     }
 
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.captcha.isSolved = isSolved;
+        SaveManager.Instance.currentData.puzzleProgress.captcha.isDoorOpened = isSolved;
+        SaveManager.Instance.currentData.puzzleProgress.captcha.isConsoleDestroyed = isSolved;
+
+        SaveManager.Instance.currentData.puzzleProgress.captcha.stage = stage;
+        SaveManager.Instance.SaveGame();
+        Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
+    }
 
     private bool IsPlayerNearConsole()
     {
@@ -78,11 +111,19 @@ public class CaptchaPuzzle : Puzzle
     public void ProgressPuzzle()
     {
         stage++;
+        UpdateCaptchaAnswer();
+        UpdatePuzzleStatus();
+        captchaUI.GetComponent<CaptchaUI>().ResetInputField();
+        captchaUI.GetComponent<CaptchaUI>().GenerateCaptcha();
+    }
+
+    private void UpdateCaptchaAnswer()
+    {
         switch (stage)
         {
             case 2:
                 captchaUI.GetComponent<CaptchaUI>().SetExtraChar('!');
-                puzzleText.GetComponent<TextMeshPro>().text = "Solve the Captcha !";
+                puzzleText.GetComponent<TextMeshPro>().text = "Solve the Captcha!";
                 break;
             case 3:
                 captchaUI.GetComponent<CaptchaUI>().SetExtraChar('.');
@@ -97,11 +138,11 @@ public class CaptchaPuzzle : Puzzle
                 slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
                 slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
                 return;
+            default:
+                break;
         }
 
         captchaUI.GetComponent<CaptchaUI>().UpdateProgressText(stage, lastStage - 1);
-        captchaUI.GetComponent<CaptchaUI>().ResetInputField();
-        captchaUI.GetComponent<CaptchaUI>().GenerateCaptcha();
     }
 
 }

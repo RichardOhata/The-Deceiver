@@ -3,7 +3,7 @@ using UnityEngine;
 public enum AreaID
 {
     Summer,
-    Fall,
+    Autumn,
     Winter
 }
 

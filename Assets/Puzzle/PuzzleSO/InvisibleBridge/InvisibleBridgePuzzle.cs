@@ -11,6 +11,14 @@ public class InvisibleBridgePuzzle : Puzzle
     [SerializeField] private Light eyeLight;
     private float maxIntensity = 1.0f;
     [SerializeField] private float intensitySpeed = 0.9f;
+
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.invisibleBridge.isSolved;
+        }
+    }
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -18,6 +26,13 @@ public class InvisibleBridgePuzzle : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
+    }
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.invisibleBridge.isSolved = true;
+        SaveManager.Instance.SaveGame();
+        Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
     }
 
     private void Update()
@@ -39,7 +54,6 @@ public class InvisibleBridgePuzzle : Puzzle
 
     private void OnDisable()
     {
-
         if (eyeLight != null)
         {
             eyeLight.intensity = 0f;

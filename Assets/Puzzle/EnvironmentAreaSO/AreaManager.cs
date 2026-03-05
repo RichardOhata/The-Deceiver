@@ -10,13 +10,28 @@ public class AreaManager : MonoBehaviour
     [SerializeField] private GameObject slidingDoor;
 
     private int _puzzlesSolved = 0;
+
+
+    private ISeasonalData envData => GetCurrentAreaData();
+    private void Awake()
+    {
+
+        if (SaveManager.Instance != null)
+        {
+            _puzzlesSolved = envData.puzzleProgress;
+        }
+    }
     void Start()
     {
-        // Example: Load data from save system
-        // _puzzlesSolved = SaveSystem.Load(currentArea.areaID);
         if (progressionText != null)
         {
             UpdateUI();
+        }
+
+        if (envData.areaComplete)
+        {
+            slidingDoor.GetComponent<Animator>().Play("OpenSlidingDoor", 0, 1f);
+            Destroy(progressionText);
         }
         
     }
@@ -24,6 +39,9 @@ public class AreaManager : MonoBehaviour
     public void OnPuzzleSolved()
     {
         _puzzlesSolved++;
+
+        envData.puzzleProgress = _puzzlesSolved;
+       
 
         // Clamp to ensure we don't go over the total defined in the SO
         if (_puzzlesSolved > currentArea.totalPuzzles)
@@ -39,8 +57,9 @@ public class AreaManager : MonoBehaviour
             slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
             slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
             Destroy(progressionText);
-            //Debug.Log($"Area {currentArea.displayName} Completed!");
+            envData.areaComplete = true;
         }
+        SaveManager.Instance.SaveGame();
     }
 
     private void UpdateUI()
@@ -49,5 +68,17 @@ public class AreaManager : MonoBehaviour
         string progress = currentArea.GetProgressString(_puzzlesSolved);
         progressionText.text = progress;
         Debug.Log($"Current Progress: {progress}");
+    }
+
+    private ISeasonalData GetCurrentAreaData()
+    {
+        var env = SaveManager.Instance.currentData.environmentData;
+        return currentArea.areaID switch
+        {
+            AreaID.Summer => env.summerEnvironment,
+            AreaID.Autumn => env.autumnEnvironment,
+            AreaID.Winter => env.winterEnvironment,
+            _ => env.summerEnvironment
+        };
     }
 }

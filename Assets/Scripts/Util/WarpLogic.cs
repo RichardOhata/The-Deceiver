@@ -6,7 +6,7 @@ public class WarpLogic : MonoBehaviour
 
     [SerializeField]
     private GameObject destination;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+  
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -15,6 +15,9 @@ public class WarpLogic : MonoBehaviour
    
     public void Warp()
     {
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         player.GetComponent<Transform>().position = destination.GetComponent<Transform>().position;
     }
 }

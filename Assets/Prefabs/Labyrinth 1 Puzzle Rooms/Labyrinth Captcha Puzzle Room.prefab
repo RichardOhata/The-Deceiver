@@ -89,6 +89,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &5521713115580936085
 MeshCollider:
@@ -201,6 +202,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5110074640404964581
 BoxCollider:
@@ -312,6 +314,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4142474015909912595
 BoxCollider:
@@ -344,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3775761956008007129}
   m_Layer: 0
-  m_Name: Warp Destination
+  m_Name: Check Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +362,7 @@ Transform:
   m_GameObject: {fileID: 1049730641391467956}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -507,6 +510,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1777880161952820178
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +602,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8823360539293405863
 BoxCollider:
@@ -707,6 +714,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8415439636472733155
 BoxCollider:
@@ -818,6 +826,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4705341902989800680
 BoxCollider:
@@ -873,13 +882,11 @@ Transform:
   - {fileID: 3380280383997632033}
   - {fileID: 3775761956008007129}
   - {fileID: 42155015297847522}
-  - {fileID: 4610965550934867620}
-  - {fileID: 7755105712909152145}
   - {fileID: 5756134337208120420}
   - {fileID: 4196748466430725676}
-  - {fileID: 1773403251366705163}
   - {fileID: 9079424603186155249}
   - {fileID: 2666932868311625525}
+  - {fileID: 4851242165927002020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &4586501222725327184
@@ -896,6 +903,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   puzzleData: {fileID: 11400000, guid: 49b0aba12c5bae34498ec6f97199897d, type: 2}
   isSolved: 0
+  hasStarted: 0
+  checkpointLocation: {fileID: 3775761956008007129}
   captchaUI: {fileID: 0}
   captchaConsole: {fileID: 2409066861054241811}
   stage: 1
@@ -993,6 +1002,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2728197950910708691
 BoxCollider:
@@ -1043,11 +1053,11 @@ Transform:
   m_GameObject: {fileID: 3473383697315072689}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 2.55, z: -8.84}
+  m_LocalPosition: {x: 0, y: 2.55, z: -8.839996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9043387401228232614}
+  m_Father: {fileID: 4851242165927002020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1338047691459034920
 BoxCollider:
@@ -1082,10 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a675e71218cee0844aec6eb5a8819554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  actionToRebind: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  actionName: 
-  originalBindingPath: 
-  newBinding: 
+  bindingsToChange: []
 --- !u!114 &7067446077870421142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,6 +1126,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3670105130860193890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,12 +1156,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3670105130860193890}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.37, y: 0, z: 0.08}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -4.37, y: 0, z: 0.08000183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9043387401228232614}
+  m_Father: {fileID: 4851242165927002020}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &4413524932446536695
 BoxCollider:
@@ -1233,6 +1243,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3976826399353631946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1335,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6624290843019396136
 BoxCollider:
@@ -1433,6 +1447,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &759959300841940477
 BoxCollider:
@@ -1544,6 +1559,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1913130397101361636
 BoxCollider:
@@ -1655,6 +1671,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &468411307049433588
 BoxCollider:
@@ -1802,6 +1819,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &953787878649737483
 BoxCollider:
@@ -1824,6 +1842,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5665351182492952139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4851242165927002020}
+  m_Layer: 0
+  m_Name: Triggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4851242165927002020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665351182492952139}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4610965550934867620}
+  - {fileID: 7755105712909152145}
+  - {fileID: 1773403251366705163}
+  m_Father: {fileID: 9043387401228232614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6836802296906547406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,6 +1960,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &7251819444605891658
 MonoBehaviour:
@@ -1929,7 +1982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Solve the Captcha .
+  m_text: Solve the Captcha.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1967,6 +2020,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2092,6 +2146,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8323129141288910531
 BoxCollider:
@@ -2148,7 +2203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.47, y: 3.65}
+  m_AnchoredPosition: {x: -7.47, y: 3.16}
   m_SizeDelta: {x: 9.2364, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7695524086516332339
@@ -2198,6 +2253,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1245496125714282169
 MonoBehaviour:
@@ -2253,10 +2309,11 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2384,6 +2441,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8480520308857881678
 BoxCollider:
@@ -2495,6 +2553,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &569740426484930485
 BoxCollider:
@@ -2545,11 +2604,11 @@ Transform:
   m_GameObject: {fileID: 8094247728514808327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 2.43, z: 10.02}
+  m_LocalPosition: {x: 0, y: 2.43, z: 10.020004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9043387401228232614}
+  m_Father: {fileID: 4851242165927002020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4887206874941632957
 BoxCollider:
@@ -2584,10 +2643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a675e71218cee0844aec6eb5a8819554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  actionToRebind: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  actionName: 
-  originalBindingPath: 
-  newBinding: 
+  bindingsToChange: []
 --- !u!114 &248242700257527137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2633,6 +2689,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3843870657458436133
 PrefabInstance:
   m_ObjectHideFlags: 0
