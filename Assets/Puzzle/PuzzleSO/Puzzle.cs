@@ -11,6 +11,7 @@ public abstract class Puzzle : MonoBehaviour
 
     public virtual void StartPuzzle()
     {
+        if (isSolved) return;
         Debug.Log($"Starting puzzle: {puzzleData.puzzleName}");
         hasStarted = true;
         SaveCheckPointLocation(); 

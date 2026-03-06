@@ -19,7 +19,10 @@ public class SummerEnvironmentArea : MonoBehaviour
 
     private void Awake()
     {
-       
+       if (SaveManager.Instance.currentData.environmentData.summerEnvironment.hideLabyrinth)
+        {
+            HideLabyrinth();
+        }
     }
     void Start()
     {

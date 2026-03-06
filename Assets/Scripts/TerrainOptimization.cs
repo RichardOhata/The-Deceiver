@@ -12,10 +12,9 @@ public class TerrainOptimization : MonoBehaviour
 
     [SerializeField] private GameObject[] terrainObjects;
     private List<TerrainComponents> cachedComponents = new List<TerrainComponents>();
-
+    [SerializeField] private BoxCollider areaZone;
     private void Awake()
     {
-     
         foreach (var t in terrainObjects)
         {
             cachedComponents.Add(new TerrainComponents
@@ -27,6 +26,18 @@ public class TerrainOptimization : MonoBehaviour
 
    
         SetTerrainActive(false);
+    }
+
+    private void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            if (areaZone.bounds.Contains(player.transform.position))
+            {
+                SetTerrainActive(true);
+            }
+        }
     }
 
     public void SetTerrainActive(bool isActive)

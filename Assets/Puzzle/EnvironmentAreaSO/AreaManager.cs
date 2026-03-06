@@ -30,7 +30,7 @@ public class AreaManager : MonoBehaviour
 
         if (envData.areaComplete)
         {
-            slidingDoor.GetComponent<Animator>().Play("OpenSlidingDoor", 0, 1f);
+            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
             Destroy(progressionText);
         }
         

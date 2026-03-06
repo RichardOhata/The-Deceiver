@@ -33,7 +33,7 @@ public class CaptchaPuzzle : Puzzle
     {
         if (isSolved)
         {
-            slidingDoor.GetComponent<Animator>().Play("OpenSlidingDoor", 0, 1f);
+            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
             interactTrigger.SetActive(false);
             monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
             puzzleText.SetActive(false);
@@ -78,7 +78,6 @@ public class CaptchaPuzzle : Puzzle
 
     private bool IsPlayerNearConsole()
     {
-          
         if (player == null) return false;
 
         float distance = Vector3.Distance(player.transform.position, captchaConsole.transform.position);
@@ -132,6 +131,7 @@ public class CaptchaPuzzle : Puzzle
                 break;
 
             case lastStage:
+                if (isSolved) return;
                 SolvePuzzle();
                 CloseUI();
                 monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
