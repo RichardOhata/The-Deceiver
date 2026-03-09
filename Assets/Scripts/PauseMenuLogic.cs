@@ -87,6 +87,8 @@ public class PauseMenuLogic : MonoBehaviour
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            AudioListener.pause = true;
             if (stopTime)
             {
                 Time.timeScale = 0;
@@ -106,6 +108,8 @@ public class PauseMenuLogic : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;
+
+            AudioListener.pause = false;
         }
     }
 

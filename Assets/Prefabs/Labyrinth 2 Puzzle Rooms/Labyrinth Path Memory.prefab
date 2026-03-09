@@ -30,10 +30,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5663788074625022477}
-  - {fileID: 885634940689475109}
+  - {fileID: 4612620437245771901}
   - {fileID: 1851362952933128761}
-  - {fileID: 1937461577956289053}
   - {fileID: 702760809491676182}
   - {fileID: 897809108621942744}
   - {fileID: 3630772150921460251}
@@ -55,6 +53,7 @@ MonoBehaviour:
   puzzleData: {fileID: 11400000, guid: 297cc8271171924458023809fe7196b8, type: 2}
   isSolved: 0
   hasStarted: 0
+  checkpointLocation: {fileID: 1851362952933128761}
 --- !u!1 &103786901483973569
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,13 +82,13 @@ Transform:
   m_GameObject: {fileID: 103786901483973569}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0456, y: 5.9, z: -0.006}
+  m_LocalPosition: {x: -0.045599937, y: 5.9, z: -0.005996704}
   m_LocalScale: {x: 17.22294, y: 1, z: 21.04789}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7338263992146240262}
   - {fileID: 5753204045096749510}
-  m_Father: {fileID: 1611136399079592653}
+  m_Father: {fileID: 4612620437245771901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5530828433234660626
 MeshFilter:
@@ -950,7 +949,7 @@ Transform:
   - {fileID: 5425147409733028658}
   - {fileID: 3362479904199310797}
   - {fileID: 8501607370090952728}
-  m_Father: {fileID: 1611136399079592653}
+  m_Father: {fileID: 4612620437245771901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4937228603150007793
 GameObject:
@@ -984,7 +983,7 @@ Transform:
   m_LocalScale: {x: 1.9054052, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1611136399079592653}
+  m_Father: {fileID: 4612620437245771901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2347250456363377356
 MeshFilter:
@@ -1325,6 +1324,40 @@ Transform:
   - {fileID: 1339870427645356901}
   - {fileID: 4698066661081357888}
   - {fileID: 3865155057349909501}
+  m_Father: {fileID: 1611136399079592653}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5305860709189117924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4612620437245771901}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4612620437245771901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305860709189117924}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5663788074625022477}
+  - {fileID: 885634940689475109}
+  - {fileID: 1937461577956289053}
   m_Father: {fileID: 1611136399079592653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5935747409904670676
@@ -2132,7 +2165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1851362952933128761}
   m_Layer: 0
-  m_Name: Warp Destination
+  m_Name: Check Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
