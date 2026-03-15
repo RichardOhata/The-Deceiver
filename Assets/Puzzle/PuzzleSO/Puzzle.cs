@@ -47,16 +47,22 @@ public abstract class Puzzle : MonoBehaviour
         }
     }
 
-    private void SaveCheckPointLocation()
+    public void SaveCheckPointLocation(GameObject overrideLocation = null)
     {
-        if (checkpointLocation != null && SaveManager.Instance != null)
+        Transform targetLocation = overrideLocation != null ? overrideLocation.transform : checkpointLocation;
+
+        if (targetLocation != null && SaveManager.Instance != null)
         {
-            SaveManager.Instance.currentData.playerPosition.x = checkpointLocation.position.x;
-            SaveManager.Instance.currentData.playerPosition.y = checkpointLocation.position.y;
-            SaveManager.Instance.currentData.playerPosition.z = checkpointLocation.position.z;
+            SaveManager.Instance.currentData.playerPosition.x = targetLocation.position.x;
+            SaveManager.Instance.currentData.playerPosition.y = targetLocation.position.y;
+            SaveManager.Instance.currentData.playerPosition.z = targetLocation.position.z;
 
             SaveManager.Instance.SaveGame();
             Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
+        }
+        else
+        {
+            Debug.LogWarning("Save failed: No valid checkpoint location or SaveManager found.");
         }
     }
 

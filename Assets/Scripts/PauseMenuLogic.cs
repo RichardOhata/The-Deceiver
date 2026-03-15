@@ -17,7 +17,9 @@ public class PauseMenuLogic : MonoBehaviour
     public static PauseMenuLogic Instance { get; private set; }
 
 
-    private bool falseEnableJump = false;
+    // --- The State Cache Variables ---
+    private bool wasJumpEnabled;
+    private bool wasCameraEnabled;
 
     private void Awake()
     {
@@ -78,12 +80,16 @@ public class PauseMenuLogic : MonoBehaviour
         
         if (isPaused)
         {
-            if (!InputManager.Instance.controls.Player.Jump.enabled)
+            wasJumpEnabled = InputManager.Instance.controls.Player.Jump.enabled;
+
+            FirstPersonLook fpl = player.gameObject.GetComponentInChildren<FirstPersonLook>();
+            if (fpl != null)
             {
-                falseEnableJump = true;
+                wasCameraEnabled = fpl.enabled;
+                fpl.enabled = false; // Turn it off so it doesn't read mouse inputs in the menu
             }
+
             InputManager.Instance.controls.Player.Disable();
-            player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = false;
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -98,12 +104,15 @@ public class PauseMenuLogic : MonoBehaviour
         {
            
             InputManager.Instance.controls.Player.Enable();
-            if (falseEnableJump)
+            if (!wasJumpEnabled)
             {
                 InputManager.Instance.controls.Player.Jump.Disable();
             }
-            falseEnableJump = false;
-            player.gameObject.GetComponentInChildren<FirstPersonLook>().enabled = true;
+            FirstPersonLook fpl = player.gameObject.GetComponentInChildren<FirstPersonLook>();
+            if (fpl != null)
+            {
+                fpl.enabled = wasCameraEnabled;
+            }
             player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

@@ -51,6 +51,12 @@ public class CombinationNorthPuzzleData
 }
 
 [System.Serializable]
+public class PathMemoryPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
 public class PuzzleProgressData
 {
     public JumpBaitPuzzleData jumpBait = new JumpBaitPuzzleData();
@@ -59,6 +65,7 @@ public class PuzzleProgressData
     public CombinationEastPuzzleData combinationEast = new CombinationEastPuzzleData();
     public CombinationWestPuzzleData combinationWest = new CombinationWestPuzzleData();
     public CombinationNorthPuzzleData combinationNorth = new CombinationNorthPuzzleData();
+    public PathMemoryPuzzleData pathMemory = new PathMemoryPuzzleData();
 }
 
 public interface ISeasonalData
