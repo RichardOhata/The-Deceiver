@@ -37,7 +37,7 @@ Transform:
   - {fileID: 702760809491676182}
   - {fileID: 897809108621942744}
   - {fileID: 3630772150921460251}
-  - {fileID: 5773345422031123840}
+  - {fileID: 4788304201289539414}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8770228971194472007
@@ -54,7 +54,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeMemory
   puzzleData: {fileID: 11400000, guid: f2d38178a96555b419177a093b36cdc3, type: 2}
   isSolved: 0
-  fovRow: {fileID: 7751054867248499340}
+  hasStarted: 0
+  checkpointLocation: {fileID: 0}
+  smoothingRow: {fileID: 7751054867248499340}
   sensRow: {fileID: 6313095579359731902}
   volumeRow: {fileID: 5261246635886136921}
 --- !u!1 &103786901483973569
@@ -148,6 +150,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2242609963350764173
 BoxCollider:
@@ -197,11 +200,11 @@ Transform:
   m_GameObject: {fileID: 591582226088889344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.37, y: 0.14068, z: 7.989}
+  m_LocalPosition: {x: -6.4701586, y: 0.14068007, z: 16.359146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1611136399079592653}
+  m_Father: {fileID: 4788304201289539414}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2210436942084410570
 MonoBehaviour:
@@ -261,6 +264,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &8448209536518526443
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -280,8 +286,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.7489347, y: 2.3536563, z: 1.784317}
-  m_Center: {x: 1.6423135, y: 0.67682815, z: 0.31223297}
+  m_Size: {x: 5.0218077, y: 3.0306487, z: 2.0326385}
+  m_Center: {x: 1.77875, y: 1.0153244, z: 0.1880722}
 --- !u!1 &1063013468116345518
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +419,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8207081072124728688
 BoxCollider:
@@ -435,6 +442,97 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1572395640731504794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7827370703337188973}
+  - component: {fileID: 9101707327993492868}
+  - component: {fileID: 7607103555364590136}
+  m_Layer: 0
+  m_Name: Start Puzzle Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7827370703337188973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572395640731504794}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.51, y: 0.14068007, z: -3.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4788304201289539414}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9101707327993492868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572395640731504794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17822fb6990ef4549905c43f92414f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
+  targetTag: Player
+  puzzles:
+  - {fileID: 8770228971194472007}
+  gameObjects: []
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8770228971194472007}
+        m_TargetAssemblyTypeName: VolumeMemory, Assembly-CSharp
+        m_MethodName: StartPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &7607103555364590136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572395640731504794}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.3826284, y: 4.2069697, z: 1.784317}
+  m_Center: {x: 2.4168763, y: 1.6034849, z: 0.31223297}
 --- !u!1 &2559661152643249563
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,8 +585,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 18.109709, y: 6.0707455, z: 30.156494}
-  m_Center: {x: -0.5110159, y: 0.75786304, z: -0.37060547}
+  m_Size: {x: 18.109709, y: 6.0707455, z: 26.836838}
+  m_Center: {x: -0.5110159, y: 0.75786304, z: 1.2892227}
 --- !u!114 &5764590075715146049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +657,9 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2849441686918553170
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +749,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3721121786289905137
 BoxCollider:
@@ -881,6 +983,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4419284661026813571
 BoxCollider:
@@ -1033,6 +1136,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &176370479942219076
 MeshCollider:
@@ -1145,6 +1249,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4900499739729034231
 BoxCollider:
@@ -1256,6 +1361,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4100298886991518924
 BoxCollider:
@@ -1445,6 +1551,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4327902682513820489
 BoxCollider:
@@ -1636,6 +1743,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3919768200866767114
 BoxCollider:
@@ -1747,6 +1855,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6752809852434052737
 BoxCollider:
@@ -1858,6 +1967,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &326928106300273009
 BoxCollider:
@@ -1969,6 +2079,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2515515561337520036
 BoxCollider:
@@ -2080,6 +2191,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5454145542845900535
 BoxCollider:
@@ -2224,6 +2336,39 @@ Transform:
   - {fileID: 6633314552520146034}
   m_Father: {fileID: 897809108621942744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8711412334098046844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4788304201289539414}
+  m_Layer: 0
+  m_Name: Triggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4788304201289539414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711412334098046844}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.8998413, y: 0, z: -8.370132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5773345422031123840}
+  - {fileID: 7827370703337188973}
+  m_Father: {fileID: 1611136399079592653}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8888154571118982196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,6 +2489,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7447214216597116683
 BoxCollider:

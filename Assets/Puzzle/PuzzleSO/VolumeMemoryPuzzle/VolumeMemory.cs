@@ -3,13 +3,24 @@ using UnityEngine;
 public class VolumeMemory : Puzzle
 {
     [SerializeField]
-    private GameObject fovRow;
+    private GameObject smoothingRow;
 
     [SerializeField]
     private GameObject sensRow;
 
     [SerializeField]
     private GameObject volumeRow;
+
+    [SerializeField]
+    private GameObject updatedCheckpoint;
+
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.volumeMemory.isSolved;
+        }
+    }
 
     public override void StartPuzzle()
     {
@@ -19,6 +30,7 @@ public class VolumeMemory : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
+        SaveCheckPointLocation(updatedCheckpoint);
     }
 
 
@@ -26,7 +38,7 @@ public class VolumeMemory : Puzzle
     {
         UpdateRows(volumeRow, SettingsManager.Instance.volume);
         UpdateRows(sensRow, SettingsManager.Instance.sensitivity);
-        UpdateRows(fovRow, Mathf.InverseLerp(0.1f, 100f, SettingsManager.Instance.fov));
+        UpdateRows(smoothingRow, 1f - SettingsManager.Instance.smoothing / 5f);
     }
     
     private void UpdateRows(GameObject row, float percentage)
@@ -46,5 +58,12 @@ public class VolumeMemory : Puzzle
          
 
         }
+    }
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.volumeMemory.isSolved = true;
+        SaveManager.Instance.SaveGame();
+        Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
     }
 }

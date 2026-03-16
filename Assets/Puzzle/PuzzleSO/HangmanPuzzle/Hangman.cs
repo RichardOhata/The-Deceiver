@@ -19,6 +19,21 @@ public class Hangman : Puzzle
 
     [SerializeField] public string detectedUser = "";
 
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.stepSoundMemory.isSolved;
+        }
+
+        if (isSolved)
+        {
+            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
+            interactTrigger.SetActive(false);
+            monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
+        }
+    }
+
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -76,6 +91,13 @@ public class Hangman : Puzzle
     {
         hangmanUI.SetActive(false);
         PauseMenuLogic.Instance.HandlePause(false);
+    }
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.hangmanPuzzle.isSolved = true;
+        SaveManager.Instance.SaveGame();
+        UnityEngine.Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
     }
 
     // Code for determining player's full name for surprise factor. This part of the code was helped developed with the use of AI.

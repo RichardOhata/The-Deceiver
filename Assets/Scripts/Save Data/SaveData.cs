@@ -57,6 +57,44 @@ public class PathMemoryPuzzleData
 }
 
 [System.Serializable]
+public class VolumePathPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class StepSoundPathPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class HangmanPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class FillInTheHolePuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class Maze1PuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class Maze2PuzzleData
+{
+    public bool isSolved = false;
+}
+
+
+
+[System.Serializable]
 public class PuzzleProgressData
 {
     public JumpBaitPuzzleData jumpBait = new JumpBaitPuzzleData();
@@ -66,6 +104,12 @@ public class PuzzleProgressData
     public CombinationWestPuzzleData combinationWest = new CombinationWestPuzzleData();
     public CombinationNorthPuzzleData combinationNorth = new CombinationNorthPuzzleData();
     public PathMemoryPuzzleData pathMemory = new PathMemoryPuzzleData();
+    public VolumePathPuzzleData volumeMemory = new VolumePathPuzzleData();
+    public StepSoundPathPuzzleData stepSoundMemory = new StepSoundPathPuzzleData();
+    public HangmanPuzzleData hangmanPuzzle = new HangmanPuzzleData();
+    public FillInTheHolePuzzleData fillInTheHole = new FillInTheHolePuzzleData();
+    public Maze1PuzzleData maze1Puzzle = new Maze1PuzzleData();
+    public Maze2PuzzleData maze2Puzzle = new Maze2PuzzleData();
 }
 
 public interface ISeasonalData

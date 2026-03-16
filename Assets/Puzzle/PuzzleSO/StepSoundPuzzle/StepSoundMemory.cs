@@ -14,6 +14,21 @@ public class StepSoundMemory : Puzzle
     [SerializeField]
     private GameObject slidingDoor;
 
+    [SerializeField]
+    private GameObject updatedCheckpoint;
+
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.stepSoundMemory.isSolved;
+        }
+        if (isSolved)
+        {
+            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
+        }
+    }
+
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -82,4 +97,11 @@ public class StepSoundMemory : Puzzle
         return true;
     }
 
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.stepSoundMemory.isSolved = true;
+        SaveManager.Instance.SaveGame();
+        Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
+    }
 }
