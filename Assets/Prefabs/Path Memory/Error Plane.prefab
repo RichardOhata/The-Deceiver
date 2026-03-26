@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8275637132407421868}
   - component: {fileID: 4146766730751031275}
   - component: {fileID: 5802398367120904894}
-  - component: {fileID: 4211202772699321877}
   m_Layer: 0
   m_Name: Error Plane
   m_TagString: Untagged
@@ -133,7 +132,7 @@ MonoBehaviour:
   onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4211202772699321877}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: KeybindChange, Assembly-CSharp
         m_MethodName: ResetAll
         m_Mode: 1
@@ -188,16 +187,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WarpLogic
   destination: {fileID: 0}
---- !u!114 &4211202772699321877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4095922696353494816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a675e71218cee0844aec6eb5a8819554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KeybindChange
-  bindingsToChange: []

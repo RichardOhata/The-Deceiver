@@ -33,11 +33,14 @@ public class CaptchaPuzzle : Puzzle
     {
         if (isSolved)
         {
-            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
+            Animator anim = slidingDoor.GetComponent<Animator>();
+            anim.SetTrigger("Door_Open");
+            anim.speed = 100f;
             interactTrigger.SetActive(false);
             monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
             puzzleText.SetActive(false);
             hiddenUIText.SetActive(true);
+            OnDisable();
         }
     }
 
@@ -56,6 +59,7 @@ public class CaptchaPuzzle : Puzzle
 
     private void OnEnable()
     {
+        if (isSolved) return;
         InputManager.Instance.controls.Player.Interact.performed += ToggleCaptchaUI;
     }
 
@@ -135,8 +139,8 @@ public class CaptchaPuzzle : Puzzle
                 SolvePuzzle();
                 CloseUI();
                 monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
-                slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
-                slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
+                slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
+               
                 return;
             default:
                 break;

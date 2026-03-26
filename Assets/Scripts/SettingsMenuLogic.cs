@@ -22,7 +22,7 @@ public class SettingsMenuLogic : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown displayModeDropDown;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+  
     void Start()
     {
         FOVSlider.value = SettingsManager.Instance.fov;

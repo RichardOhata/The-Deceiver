@@ -139,6 +139,6 @@ public class PauseMenuLogic : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene("Title Screen");
     }
 }

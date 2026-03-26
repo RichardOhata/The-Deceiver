@@ -7,15 +7,15 @@ public class AreaManager : MonoBehaviour
     public EnvironmentArea currentArea;
 
     [SerializeField] private TextMeshPro progressionText;
-    [SerializeField] private GameObject slidingDoor;
+    [SerializeField] private GameObject progressionTextBoard;
 
     private int _puzzlesSolved = 0;
 
 
     private ISeasonalData envData => GetCurrentAreaData();
+
     private void Awake()
     {
-
         if (SaveManager.Instance != null)
         {
             _puzzlesSolved = envData.puzzleProgress;
@@ -23,15 +23,16 @@ public class AreaManager : MonoBehaviour
     }
     void Start()
     {
-        if (progressionText != null)
-        {
-            UpdateUI();
-        }
-
         if (envData.areaComplete)
         {
-            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
+            progressionTextBoard.GetComponent<Animator>().Play("Progress_Text_Board_Slide_Down", 0, 1f);
             Destroy(progressionText);
+        } else
+        {
+            if (progressionText != null)
+            {
+                UpdateUI();
+            }
         }
         
     }
@@ -54,8 +55,7 @@ public class AreaManager : MonoBehaviour
 
         if (currentArea.IsAreaComplete(_puzzlesSolved))
         {
-            slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
-            slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
+            progressionTextBoard.GetComponent<Animator>().SetTrigger("Slide_Down");
             Destroy(progressionText);
             envData.areaComplete = true;
         }

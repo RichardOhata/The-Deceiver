@@ -33,7 +33,11 @@ public class SettingsManager : MonoBehaviour
     {
         sensitivity = newVal;
         PlayerPrefs.SetFloat("Sensitivity", newVal);
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().sensitivity = newVal;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponentInChildren<FirstPersonLook>().sensitivity = newVal;
+        }
     }
 
     public void SetFOV(float newVal)
@@ -66,7 +70,11 @@ public class SettingsManager : MonoBehaviour
     public void SetSmoothing(float newVal)
     {
         smoothing = newVal;
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().smoothing = newVal;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponentInChildren<FirstPersonLook>().smoothing = newVal;
+        }
         PlayerPrefs.SetFloat("Smoothing", newVal);
     }
 
@@ -95,13 +103,23 @@ public class SettingsManager : MonoBehaviour
 
         AudioListener.volume = volume;
 
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().sensitivity = sensitivity;
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonLook>().smoothing = smoothing;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            FirstPersonLook playerLookSettings = playerObj.GetComponentInChildren<FirstPersonLook>();
+            if (playerLookSettings != null)
+            {
+                playerLookSettings.sensitivity = sensitivity;
+                playerLookSettings.smoothing = smoothing;
+            }
+        }
 
         if (Camera.main != null)
             Camera.main.fieldOfView = fov;
 
-
-        reticleObject.SetActive(reticle == 1 ? true : false);
+        if (reticleObject != null)
+        {
+            reticleObject.SetActive(reticle == 1 ? true : false);
+        }
     }
 }

@@ -67,8 +67,7 @@ public class StepSoundMemory : Puzzle
 
         if (CheckValidTiles() && CheckInValidTiles())
         {
-            slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
-            slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
+            slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
             SolvePuzzle();
         }
     }

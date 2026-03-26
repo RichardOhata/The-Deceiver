@@ -15,6 +15,8 @@ public class SaveManager : MonoBehaviour
     public GameObject saveIcon;
     public float extraPaddingTime = 0.5f;
 
+    public bool HasSaveFile => File.Exists(Application.persistentDataPath + "/SaveData.json");
+
     private void Awake()
     {
         if (Instance == null) Instance = this;

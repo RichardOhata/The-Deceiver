@@ -92,6 +92,36 @@ public class Maze2PuzzleData
     public bool isSolved = false;
 }
 
+[System.Serializable]
+public class ABCPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class TimeButtonPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class InvisibleBridge2PuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class NPCPuzzleData
+{
+    public bool isSolved = false;
+}
+
+[System.Serializable]
+public class TerrainPuzzleData
+{
+    public bool isSolved = false;
+}
+
 
 
 [System.Serializable]
@@ -110,6 +140,11 @@ public class PuzzleProgressData
     public FillInTheHolePuzzleData fillInTheHole = new FillInTheHolePuzzleData();
     public Maze1PuzzleData maze1Puzzle = new Maze1PuzzleData();
     public Maze2PuzzleData maze2Puzzle = new Maze2PuzzleData();
+    public ABCPuzzleData abcPuzzle = new ABCPuzzleData();
+    public TimeButtonPuzzleData timeButtonPuzzle = new TimeButtonPuzzleData();
+    public InvisibleBridge2PuzzleData invisibleBridge2 = new InvisibleBridge2PuzzleData();
+    public NPCPuzzleData npcPuzzle = new NPCPuzzleData();
+    public TerrainPuzzleData terrainPuzzle = new TerrainPuzzleData();
 }
 
 public interface ISeasonalData

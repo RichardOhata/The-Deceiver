@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf540ab0481a1784ea9ec57ac6a5e178, type: 3}
   m_Name: AutumnEnvironment
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentArea
-  areaID: 0
-  totalPuzzles: 0
+  areaID: 1
+  totalPuzzles: 3

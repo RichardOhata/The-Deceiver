@@ -33,7 +33,7 @@ public class CaptchaUI : MonoBehaviour {
 
     public void GenerateCaptcha()
     {
-       
+        uiSubmitButton.interactable = true;
         currentCaptcha = captchaGenerator.Generate();
 
         uiCodeImage.sprite = currentCaptcha.Image;
@@ -56,6 +56,7 @@ public class CaptchaUI : MonoBehaviour {
 
         if (isValid)
         {
+            uiSubmitButton.interactable = false;
             uiCorrectText.gameObject.SetActive(true);
 
             StartCoroutine(DelayedAction(1.0f, () =>
