@@ -73,6 +73,7 @@ public class SummerEnvironmentArea : MonoBehaviour
         invisibleWaterVolume.SetActive(true);
         invisibleBounds.SetActive(true);
         Destroy(hiddenLabyrinthCheck);
+        hiddenLabyrinthCheck = null;
     }
 
 }

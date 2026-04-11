@@ -17,6 +17,9 @@ public class StepSoundMemory : Puzzle
     [SerializeField]
     private GameObject updatedCheckpoint;
 
+    private FirstPersonAudio playerAudio;
+
+    private int activeZones = 0;
     private void Awake()
     {
         if (SaveManager.Instance != null)
@@ -25,8 +28,11 @@ public class StepSoundMemory : Puzzle
         }
         if (isSolved)
         {
-            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
+            Animator anim = slidingDoor.GetComponent<Animator>();
+            anim.SetTrigger("Door_Open");
+            anim.speed = 100f;
         }
+        playerAudio = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>();
     }
 
     public override void StartPuzzle()
@@ -39,19 +45,8 @@ public class StepSoundMemory : Puzzle
         base.SolvePuzzle();
     }
 
-
-    public void MuteFootSteps()
-    {
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>().stepAudio.mute = true;
-    }
-    public void UnMuteFootSteps()
-    {
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>().stepAudio.mute = false;
-    }
-
     public void ResetTiles()
     {
-        MuteFootSteps();
         foreach(BlankPlaneLogic child in pathTitles.GetComponentsInChildren<BlankPlaneLogic>())
         {
             child.ResetStatus();
@@ -82,6 +77,19 @@ public class StepSoundMemory : Puzzle
             }
         }
         return true;
+    }
+    public void MuteSteps(bool isMute)
+    {
+        if (isMute)
+        {
+            activeZones++;
+        }
+        else
+        {
+            activeZones = Mathf.Max(0, activeZones - 1);
+        }
+        playerAudio.stepAudio.mute = (activeZones > 0);
+        playerAudio.runningAudio.mute = (activeZones > 0);
     }
 
     private bool CheckInValidTiles()

@@ -34,6 +34,7 @@ public class ReverseMaze : Puzzle
             activeZones = Mathf.Max(0, activeZones - 1);
         }
         playerAudio.stepAudio.mute = (activeZones > 0);
+        playerAudio.runningAudio.mute = (activeZones > 0);
     }
 
     public override bool IsUIOpen => drawBoard != null && drawBoard.mazeUIOpen;

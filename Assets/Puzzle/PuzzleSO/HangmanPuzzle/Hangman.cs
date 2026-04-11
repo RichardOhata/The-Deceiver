@@ -19,18 +19,22 @@ public class Hangman : Puzzle
 
     [SerializeField] public string detectedUser = "";
 
+
     private void Awake()
     {
         if (SaveManager.Instance != null)
         {
-            isSolved = SaveManager.Instance.currentData.puzzleProgress.stepSoundMemory.isSolved;
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.hangmanPuzzle.isSolved;
         }
 
         if (isSolved)
         {
-            slidingDoor.GetComponent<Animator>().Play("Sliding_Door_Open", 0, 1f);
+            Animator anim = slidingDoor.GetComponent<Animator>();
+            anim.SetTrigger("Door_Open");
+            anim.speed = 100f;
             interactTrigger.SetActive(false);
             monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
+            OnDisable();
         }
     }
 
@@ -45,14 +49,14 @@ public class Hangman : Puzzle
         base.SolvePuzzle();
         CloseUI();
         monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
-        slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
-        slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
+        slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
         interactTrigger.SetActive(false);
         OnDisable();
     }
 
     private void OnEnable()
     {
+        if (isSolved) return;
         InputManager.Instance.controls.Player.Interact.performed += ToggleHangmanUI;
     }
 

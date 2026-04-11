@@ -4,7 +4,7 @@ using UnityEngine;
 public class TerrainOptimization : MonoBehaviour
 {
 
-    private class TerrainComponents
+    public class TerrainComponents
     {
         public Terrain Terrain;
         public TerrainCollider Collider;
@@ -36,6 +36,7 @@ public class TerrainOptimization : MonoBehaviour
             if (areaZone.bounds.Contains(player.transform.position))
             {
                 SetTerrainActive(true);
+                Debug.Log("123");
             }
         }
     }

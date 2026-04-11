@@ -30,7 +30,7 @@ public class VolumeMemory : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        SaveCheckPointLocation(updatedCheckpoint);
+        //SaveCheckPointLocation(updatedCheckpoint);
     }
 
 

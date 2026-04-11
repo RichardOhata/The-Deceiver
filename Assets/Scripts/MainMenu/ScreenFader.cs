@@ -15,45 +15,41 @@ public class ScreenFader : MonoBehaviour
         FadeToClear();
     }
 
-    public void FadeToBlack()
+    private IEnumerator FadeRoutine(float targetAlpha, float customDuration)
     {
-        StartCoroutine(FadeRoutine(1f));
-    }
-
-    public void FadeToClear()
-    {
-        StartCoroutine(FadeRoutine(0f));
-    }
-
-    private IEnumerator FadeRoutine(float targetAlpha)
-    {
-
         fadeGroup.blocksRaycasts = true;
-
         float startAlpha = fadeGroup.alpha;
         float time = 0;
         bool hasUnlocked = false;
 
-        while (time < fadeDuration)
+     
+        while (time < customDuration)
         {
             time += Time.deltaTime;
 
-
-            if (!hasUnlocked && time >= 1.0f)
+            
+            if (!hasUnlocked && time >= customDuration / 2)
             {
                 fadeGroup.blocksRaycasts = false;
                 hasUnlocked = true;
-                Debug.Log("Buttons are now clickable!");
             }
 
-            fadeGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            fadeGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / customDuration);
             yield return null;
         }
 
         fadeGroup.alpha = targetAlpha;
-        if (targetAlpha == 0f)
-        {
-            fadeGroup.blocksRaycasts = false;
-        }
+        if (targetAlpha == 0f) fadeGroup.blocksRaycasts = false;
+    }
+
+ 
+    public void FadeToBlack()
+    {
+        StartCoroutine(FadeRoutine(1f, 0.5f));
+    }
+
+    public void FadeToClear()
+    {
+        StartCoroutine(FadeRoutine(0f, fadeDuration)); 
     }
 }

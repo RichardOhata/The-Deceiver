@@ -6,15 +6,25 @@ public abstract class Puzzle : MonoBehaviour
     public bool isSolved = false;
     public bool hasStarted = false;
 
+    [Header("Checkpoint Settings")]
+    [SerializeField] private bool saveCheckpointOnStart;
+    [SerializeField] private bool saveCheckpointOnSolve;
+    
     [Header("Save Settings")]
-    public Transform checkpointLocation;
+    public Transform checkpointInitialLocation;
+    public Transform checkpointFinishLocation;
+
+   
 
     public virtual void StartPuzzle()
     {
         if (isSolved) return;
         Debug.Log($"Starting puzzle: {puzzleData.puzzleName}");
         hasStarted = true;
-        SaveCheckPointLocation(); 
+        if (saveCheckpointOnStart)
+        {
+            SaveCheckPointLocation(checkpointInitialLocation);
+        }
     }
 
     public virtual void SolvePuzzle()
@@ -24,6 +34,10 @@ public abstract class Puzzle : MonoBehaviour
         isSolved = true;
         PlaySolveSFX();
         UpdatePuzzleStatus();
+        if (saveCheckpointOnSolve)
+        {
+            SaveCheckPointLocation(checkpointFinishLocation);
+        }
     }
 
 
@@ -47,7 +61,7 @@ public abstract class Puzzle : MonoBehaviour
         }
     }
 
-    public void SaveCheckPointLocation(GameObject overrideLocation = null)
+    public void SaveCheckPointLocation(Transform checkpointLocation = null, GameObject overrideLocation = null)
     {
         Transform targetLocation = overrideLocation != null ? overrideLocation.transform : checkpointLocation;
 

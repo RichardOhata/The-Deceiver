@@ -8,13 +8,6 @@ public class BlankPlaneLogic : MonoBehaviour
     [SerializeField]
     private Material green;
 
-    [SerializeField]
-    private FirstPersonAudio playerAudio; 
-
-    private void Awake()
-    {
-        playerAudio = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FirstPersonAudio>();
-    }
 
     public enum CorrectPathFlag
     {
@@ -33,13 +26,6 @@ public class BlankPlaneLogic : MonoBehaviour
     {
         gameObject.GetComponent<MeshRenderer>().material = green;
         steppedOn = true;
-        if (flag == CorrectPathFlag.correct)
-        {
-            playerAudio.stepAudio.mute = false;
-        } else
-        {
-            playerAudio.stepAudio.mute = true;
-        }
     }
 
     public void ResetStatus()

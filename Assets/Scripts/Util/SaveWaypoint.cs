@@ -14,10 +14,12 @@ public class SaveWaypoint : MonoBehaviour
     [Tooltip("Manually type coordinates here if mode is set to Manual.")]
     public Vector3 manualCoordinates;
 
+    private bool hasSaved = false;
+
     public void SetWaypoint()
     {
         if (SaveManager.Instance == null) return;
-
+        if (hasSaved) return;
         Vector3 finalPosition;
 
         // Choose the position based on the dropdown selection
@@ -29,7 +31,7 @@ public class SaveWaypoint : MonoBehaviour
         {
             finalPosition = manualCoordinates;
         }
-
+        hasSaved = true;
         // Apply to Save Data
         SaveManager.Instance.currentData.playerPosition.x = finalPosition.x;
         SaveManager.Instance.currentData.playerPosition.y = finalPosition.y;

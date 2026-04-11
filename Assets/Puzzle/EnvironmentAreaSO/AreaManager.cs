@@ -25,8 +25,9 @@ public class AreaManager : MonoBehaviour
     {
         if (envData.areaComplete)
         {
-            progressionTextBoard.GetComponent<Animator>().Play("Progress_Text_Board_Slide_Down", 0, 1f);
+            progressionTextBoard.GetComponent<Animator>().Play("Progress_Text_Board_Slide_Down", 0, 0f);
             Destroy(progressionText);
+            progressionText = null;
         } else
         {
             if (progressionText != null)

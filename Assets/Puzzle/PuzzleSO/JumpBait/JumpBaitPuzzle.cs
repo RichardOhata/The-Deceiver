@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -75,16 +76,31 @@ public class JumpBaitPuzzle : Puzzle
                 pauseMenuText.text = "EAUSED";
                 break;
         }
-    } 
+    }
 
     public void DisableFirstPlatform()
     {
-        firstPlatform.SetActive(false);
+        
+        StartCoroutine(ReactivatePlatformAfterDelay(firstPlatform, 2f));
     }
 
     public void DisableSecondPlatform()
     {
-        secondPlatform.SetActive(false);
+
+        StartCoroutine(ReactivatePlatformAfterDelay(secondPlatform, 2f));
+    }
+
+
+    private IEnumerator ReactivatePlatformAfterDelay(GameObject platform, float delayTime)
+    {
+     
+        platform.SetActive(false);
+
+  
+        yield return new WaitForSeconds(delayTime);
+
+
+        platform.SetActive(true);
     }
 
     public void SetPlayerInRangeFirst(bool state)

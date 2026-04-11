@@ -72,9 +72,6 @@ public class CaptchaPuzzle : Puzzle
     public override void UpdatePuzzleStatus()
     {
         SaveManager.Instance.currentData.puzzleProgress.captcha.isSolved = isSolved;
-        SaveManager.Instance.currentData.puzzleProgress.captcha.isDoorOpened = isSolved;
-        SaveManager.Instance.currentData.puzzleProgress.captcha.isConsoleDestroyed = isSolved;
-
         SaveManager.Instance.currentData.puzzleProgress.captcha.stage = stage;
         SaveManager.Instance.SaveGame();
         Debug.Log("Checkpoint and Puzzle State Auto-Saved!");

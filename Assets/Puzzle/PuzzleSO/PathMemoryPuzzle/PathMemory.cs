@@ -46,7 +46,7 @@ public class PathMemory : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        SaveCheckPointLocation(updatedCheckpoint);
+        //SaveCheckPointLocation(updatedCheckpoint);
         RestoreNormalCamera();
     }
 

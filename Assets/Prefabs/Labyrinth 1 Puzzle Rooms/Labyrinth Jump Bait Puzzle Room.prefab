@@ -1684,7 +1684,10 @@ MonoBehaviour:
   puzzleData: {fileID: 11400000, guid: 0c104b236007a424eb1f9d6359b9c437, type: 2}
   isSolved: 0
   hasStarted: 0
-  checkpointLocation: {fileID: 5142256270452389067}
+  saveCheckpointOnStart: 0
+  saveCheckpointOnSolve: 1
+  checkpointInitialLocation: {fileID: 0}
+  checkpointFinishLocation: {fileID: 0}
   jumpTrigger: {fileID: 7328736458665980507}
   pauseMenuText: {fileID: 0}
   jumpUITrigger: {fileID: 7328736458665980507}

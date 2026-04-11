@@ -50,8 +50,11 @@ public class InputCombination : Puzzle
     }
     public override void SolvePuzzle()
     {
+        if (isSolved) return;
         base.SolvePuzzle();
         areaManager.GetComponent<AreaManager>().OnPuzzleSolved();
+     
+       
     }
 
     public override void UpdatePuzzleStatus()
@@ -96,11 +99,7 @@ public class InputCombination : Puzzle
         }
     }
 
-    /// <summary>
-    /// Set specific combination values using index-value pairs.
-    /// Example usage:
-    /// SetCombination(new List<(int, int)> { (3, 5), (1, 2) });
-    /// </summary>
+
     public void SetCombination(List<(int index, int value)> indexValuePairs)
     {
         foreach (var (index, value) in indexValuePairs)
