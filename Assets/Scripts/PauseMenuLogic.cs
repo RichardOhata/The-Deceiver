@@ -90,7 +90,14 @@ public class PauseMenuLogic : MonoBehaviour
             }
 
             InputManager.Instance.controls.Player.Disable();
-            player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = false;
+            var audioScript = player.gameObject.GetComponentInChildren<FirstPersonAudio>();
+            if (audioScript != null)
+            {
+                audioScript.enabled = false;
+                audioScript.stepAudio.mute = true;
+                audioScript.runningAudio.mute = true;
+            }
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -107,13 +114,19 @@ public class PauseMenuLogic : MonoBehaviour
             if (!wasJumpEnabled)
             {
                 InputManager.Instance.controls.Player.Jump.Disable();
-            }
+            }   
             FirstPersonLook fpl = player.gameObject.GetComponentInChildren<FirstPersonLook>();
             if (fpl != null)
             {
                 fpl.enabled = wasCameraEnabled;
             }
-            player.gameObject.GetComponentInChildren<FirstPersonAudio>().enabled = true;
+            var audioScript = player.gameObject.GetComponentInChildren<FirstPersonAudio>();
+            if (audioScript != null)
+            {
+                audioScript.enabled = true;
+                audioScript.stepAudio.mute = false;
+                audioScript.runningAudio.mute = false;
+            }
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;

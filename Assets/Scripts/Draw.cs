@@ -69,6 +69,7 @@ public class Draw : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f; // How long the fade takes
     private Coroutine fadeRoutine;
 
+
     private void Start()
     {
         colorMap = new Color[totalXPixels * totalYPixels];
@@ -177,6 +178,7 @@ public class Draw : MonoBehaviour
                     {
                         hasWon = true;
                         puzzleScript.SolvePuzzle();
+                        puzzleScript.CloseUI();
                         Debug.Log("Maze Complete!");
                     }
                 }

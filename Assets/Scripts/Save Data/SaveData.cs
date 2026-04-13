@@ -199,4 +199,6 @@ public class SaveData
     public PlayerPositionData playerPosition = new PlayerPositionData();
     public PuzzleProgressData puzzleProgress = new PuzzleProgressData();
     public SeasonalEnvironmentData environmentData = new SeasonalEnvironmentData();
+
+    public float totalPlayTime = 0f;
 }

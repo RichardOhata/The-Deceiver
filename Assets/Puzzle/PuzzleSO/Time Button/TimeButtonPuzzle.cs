@@ -13,18 +13,41 @@ public class TimeButtonPuzzle : Puzzle
     private int currentIndex = 1;
     private int lastIndex = 4;
     [SerializeField] private GameObject slidingDoor;
+
+    [SerializeField] private GameObject buttons;
+
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.timeButtonPuzzle.isSolved;
+        }
+
+        if (isSolved)
+        {
+            Animator anim = slidingDoor.GetComponent<Animator>();
+            anim.SetTrigger("Door_Open");
+            anim.speed = 100f;
+            buttons.SetActive(false);
+        }
+    }
     public override void StartPuzzle()
     {
-        base.StartPuzzle();
+        if (!isSolved) base.StartPuzzle();
         clockText = clockTextGO.GetComponent<TextMeshPro>();
     }
 
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        //UIPrompt.GetComponent<UIUpdate>().DisablePanel();
-        slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
-        slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
+        slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
+        UIPrompt.GetComponent<UIUpdate>().DisablePanel();
+    }
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.timeButtonPuzzle.isSolved = isSolved;
+        SaveManager.Instance.SaveGame();
     }
 
     void Update()

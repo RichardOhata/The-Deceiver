@@ -24,8 +24,23 @@ public class FillInTheHolePuzzle : Puzzle
     [SerializeField]
     private GameObject reticleCube;
 
-    private void Start()
+    [SerializeField] private AreaManager areaManager;
+
+    private void Awake()
     {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.fillInTheHole.isSolved;
+        }
+        if (isSolved)
+        {
+            ShowReticleCube(true);
+            enabled = false;
+        }
+    }
+
+    private void Start()
+    { 
         playerCamera = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
     }
  
@@ -37,9 +52,15 @@ public class FillInTheHolePuzzle : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        reticleCube.SetActive(true);
-
+        ShowReticleCube(true);
+        areaManager.GetComponent<AreaManager>().OnPuzzleSolved();
         enabled = false;
+    }
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.fillInTheHole.isSolved = true;
+        SaveManager.Instance.SaveGame();
     }
 
 

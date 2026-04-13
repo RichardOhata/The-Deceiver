@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class ABCPuzzle : Puzzle
@@ -11,9 +12,33 @@ public class ABCPuzzle : Puzzle
     [SerializeField] private GameObject slidingDoor;
     [SerializeField] private GameObject monitor;
 
-  
+    private void Awake()
+    {
+        if (SaveManager.Instance != null)
+        {
+            isSolved = SaveManager.Instance.currentData.puzzleProgress.abcPuzzle.isSolved;
+        }
+        if (isSolved)
+        {
+            Animator anim = slidingDoor.GetComponent<Animator>();
+            anim.SetTrigger("Door_Open");
+            anim.speed = 100f;
+            interactTrigger.SetActive(false);
+            monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
+            OnDisable();
+        }
+    }
+
+    private void Start()
+    {
+        if (isSolved)
+        {
+            OnDisable();
+        }
+    }
     public override void StartPuzzle()
     {
+        if (isSolved) return; 
         base.StartPuzzle();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -23,14 +48,21 @@ public class ABCPuzzle : Puzzle
         base.SolvePuzzle();
         CloseUI();
         monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
-        slidingDoor.GetComponent<Animator>().SetTrigger("OpenSlidingDoor");
-        slidingDoor.GetComponentInChildren<AudioSource>().PlayDelayed(1.5f);
+        slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
         interactTrigger.SetActive(false);
         OnDisable();
     }
 
+
+    public override void UpdatePuzzleStatus()
+    {
+        SaveManager.Instance.currentData.puzzleProgress.abcPuzzle.isSolved = isSolved;
+        SaveManager.Instance.SaveGame();
+    }
+
     private void OnEnable()
     {
+        if (isSolved) return;
         InputManager.Instance.controls.Player.Interact.performed += ToggleABCUI;
     }
 
