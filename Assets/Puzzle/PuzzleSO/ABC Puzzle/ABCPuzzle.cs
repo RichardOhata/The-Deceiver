@@ -1,19 +1,20 @@
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class ABCPuzzle : Puzzle
 {
-    [SerializeField] private GameObject interactTrigger;
-    [SerializeField] private GameObject abcUI;
-    [SerializeField] private GameObject captchaConsole;
-    private GameObject player;
-
-    [SerializeField] private GameObject slidingDoor;
+    [Header("Puzzle Components")]
     [SerializeField] private GameObject monitor;
 
-    private void Awake()
+    [Header("UI References")]
+    [SerializeField] private GameObject abcUI;
+    [SerializeField] private GameObject backgroundDimmer;
+    [SerializeField] private UIUpdate uiPrompt;
+
+    [SerializeField] private GameObject slidingDoor;
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.abcPuzzle.isSolved;
@@ -23,9 +24,23 @@ public class ABCPuzzle : Puzzle
             Animator anim = slidingDoor.GetComponent<Animator>();
             anim.SetTrigger("Door_Open");
             anim.speed = 100f;
-            interactTrigger.SetActive(false);
             monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
             OnDisable();
+        }
+    }
+
+    private void Update()
+    {
+        if (isSolved) return;
+
+
+        if (CanInteractWithConsole() && !IsUIOpen)
+        {
+            uiPrompt.updatePanelText();
+        }
+        else
+        {
+            uiPrompt.DisablePanel();
         }
     }
 
@@ -40,7 +55,6 @@ public class ABCPuzzle : Puzzle
     {
         if (isSolved) return; 
         base.StartPuzzle();
-        player = GameObject.FindGameObjectWithTag("Player");
 
     }
     public override void SolvePuzzle()
@@ -49,7 +63,6 @@ public class ABCPuzzle : Puzzle
         CloseUI();
         monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
         slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
-        interactTrigger.SetActive(false);
         OnDisable();
     }
 
@@ -73,33 +86,28 @@ public class ABCPuzzle : Puzzle
     }
 
 
-    private bool IsPlayerNearConsole()
+    private bool CanInteractWithConsole()
     {
+        if (base.player == null) return false;
 
-        if (player == null) return false;
-
-        float distance = Vector3.Distance(player.transform.position, captchaConsole.transform.position);
-        return distance < 3f;
+        return LookAtUtility.IsPointedAt(base.playerCamera, monitor, 0.5f, 3.5f);
     }
 
     private void ToggleABCUI(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        interactTrigger.GetComponent<UIUpdate>().updatePanelText("");
-        if (abcUI.gameObject.activeSelf)
-        {
-            return;
-        }
 
-        if (!abcUI.gameObject.activeSelf && IsPlayerNearConsole())
+        if (!abcUI.activeSelf && CanInteractWithConsole())
         {
-            abcUI.SetActive(true);
-            PauseMenuLogic.Instance.HandlePause(false, false);
+            abcUI.gameObject.SetActive(true);
+            backgroundDimmer.SetActive(true);
+            PauseMenuLogic.Instance.HandlePause(false);
         }
     }
     public override bool IsUIOpen => abcUI.activeSelf;
     public override void CloseUI()
     {
         abcUI.SetActive(false);
+        backgroundDimmer.SetActive(false);
         PauseMenuLogic.Instance.HandlePause(false);
     }
 }

@@ -1,27 +1,25 @@
 using UnityEngine;
-
 using System;
 using System.Diagnostics;
 
 // Attempt to find users name, make them do hangman, ask them if this is their actual name, if yes, puzzle solve, if not, ask them to input their real name
 public class Hangman : Puzzle
 {
-    [SerializeField] private GameObject interactTrigger;
-    [SerializeField] private GameObject hangmanUI;
-    [SerializeField] private GameObject captchaConsole;
-    private GameObject player;
-
-    [SerializeField] private GameObject slidingDoor;
+    [Header("Puzzle Components")]
     [SerializeField] private GameObject monitor;
-
-
     [SerializeField] private string answer;
-
     [SerializeField] public string detectedUser = "";
 
+    [Header("UI References")]
+    [SerializeField] private GameObject hangmanUI;
+    [SerializeField] private GameObject backgroundDimmer;
+    [SerializeField] private UIUpdate uiPrompt;
 
-    private void Awake()
+    [SerializeField] private GameObject slidingDoor;
+
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.hangmanPuzzle.isSolved;
@@ -32,9 +30,23 @@ public class Hangman : Puzzle
             Animator anim = slidingDoor.GetComponent<Animator>();
             anim.SetTrigger("Door_Open");
             anim.speed = 100f;
-            interactTrigger.SetActive(false);
             monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
             OnDisable();
+        }
+    }
+
+    private void Update()
+    {
+        if (isSolved) return;
+
+
+        if (CanInteractWithConsole() && !IsUIOpen)
+        {
+            uiPrompt.updatePanelText();
+        }
+        else
+        {
+            uiPrompt.DisablePanel();
         }
     }
 
@@ -50,7 +62,6 @@ public class Hangman : Puzzle
         CloseUI();
         monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
         slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
-        interactTrigger.SetActive(false);
         OnDisable();
     }
 
@@ -67,33 +78,29 @@ public class Hangman : Puzzle
     }
 
 
-    private bool IsPlayerNearConsole()
+    private bool CanInteractWithConsole()
     {
+        if (base.player == null) return false;
 
-        if (player == null) return false;
-
-        float distance = Vector3.Distance(player.transform.position, captchaConsole.transform.position);
-        return distance < 3f; 
+        return LookAtUtility.IsPointedAt(base.playerCamera, monitor, 0.5f, 3.5f);
     }
 
     private void ToggleHangmanUI(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        interactTrigger.GetComponent<UIUpdate>().updatePanelText("");
-        if (hangmanUI.gameObject.activeSelf)
-        {
-            return;
-        }
 
-        if (!hangmanUI.gameObject.activeSelf && IsPlayerNearConsole())
+        if (!hangmanUI.activeSelf && CanInteractWithConsole())
         {
-            hangmanUI.SetActive(true);
+            hangmanUI.gameObject.SetActive(true);
+            backgroundDimmer.SetActive(true);
             PauseMenuLogic.Instance.HandlePause(false);
         }
     }
+
     public override bool IsUIOpen => hangmanUI.activeSelf;
     public override void CloseUI()
     {
         hangmanUI.SetActive(false);
+        backgroundDimmer.SetActive(false);
         PauseMenuLogic.Instance.HandlePause(false);
     }
 

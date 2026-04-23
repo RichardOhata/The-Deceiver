@@ -1,18 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8da4b67d0f24fa142affe02ac2e797dc, type: 3}
-  m_Name: InvisibleBridgePuzzle
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleData
-  puzzleName: InvisibleBridge
-  puzzleType: 3
-  hint: 
-  isSolved: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:2937ee251e8da683f61516493bf70527fe78b9820bfc99caba7879da98a84c45
+size 506

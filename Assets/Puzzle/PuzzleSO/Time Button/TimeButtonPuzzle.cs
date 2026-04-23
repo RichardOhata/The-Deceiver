@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class TimeButtonPuzzle : Puzzle
 {
+    [Header("Puzzle Components")]
     [SerializeField] private GameObject clockTextGO;
+    [SerializeField] private GameObject buttons;
     private TextMeshPro clockText;
     private String time;
-
-    [SerializeField] private GameObject UIPrompt;
-
     private int currentIndex = 1;
     private int lastIndex = 4;
+
+    [Header("UI References")]
+    [SerializeField] private UIUpdate uiPrompt;
     [SerializeField] private GameObject slidingDoor;
 
-    [SerializeField] private GameObject buttons;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.timeButtonPuzzle.isSolved;
@@ -41,7 +42,7 @@ public class TimeButtonPuzzle : Puzzle
     {
         base.SolvePuzzle();
         slidingDoor.GetComponent<Animator>().SetTrigger("Door_Open");
-        UIPrompt.GetComponent<UIUpdate>().DisablePanel();
+        uiPrompt.GetComponent<UIUpdate>().DisablePanel();
     }
 
     public override void UpdatePuzzleStatus()

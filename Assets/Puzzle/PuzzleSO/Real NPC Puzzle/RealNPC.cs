@@ -5,35 +5,29 @@ using System.Collections;
 
 public class RealNPC : Puzzle
 {
-    [SerializeField]
-    private GameObject NPCs;
 
-    private GameObject realNPC;
-
-    [SerializeField]
-    private UIUpdate uiPrompt;
-
-    [SerializeField]
-    private Transform playerCamera;
-
+    [Header("Puzzle Components")]
+    [SerializeField] private GameObject NPCs;
+    [SerializeField] private GameObject realNPC;
     private GameObject[] npcArray;
-
-    [SerializeField]
-    private LayerMask npcLayer;
+    [SerializeField] private LayerMask npcLayer;
     private bool isPromptCurrentlyShowing = false;
-    [SerializeField]
-    private float interactDistance = 4f;
+    [SerializeField] private float interactDistance = 4f;
 
-    [SerializeField]
-    private WarpLogic warpLogic;
+    [SerializeField] private WarpLogic warpLogic;
 
-    [SerializeField]
-    private ScreenFader screenFader;
+    [SerializeField] private ScreenFader screenFader;
 
+    [Header("UI References")]
+    [SerializeField] private UIUpdate uiPrompt;
     [SerializeField] private AreaManager areaManager;
-
-
     [SerializeField] private EndingSequence endingSequence;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+    }
     public override void StartPuzzle()
     {
         base.StartPuzzle();
@@ -85,7 +79,7 @@ public class RealNPC : Puzzle
         if (playerCamera != null && uiPrompt != null && npcArray != null)
         {
            
-            bool isLookingAtSomeone = LookAtUtility.IsLookingAtAny(playerCamera, npcArray, 30f, 0f, 4f);
+            bool isLookingAtSomeone = LookAtUtility.IsLookingAtAny(playerCamera.transform, npcArray, 30f, 0f, 4f);
 
             if (isLookingAtSomeone && !isPromptCurrentlyShowing)
             {
@@ -154,34 +148,38 @@ public class RealNPC : Puzzle
 
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
-        // If the camera isn't assigned, don't try to shoot a laser
         if (playerCamera == null) return;
 
-        // Shoot a ray from the center of the camera forward
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-
-        // Check if the ray hits anything on the NPC layer within our interactDistance
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, npcLayer))
+        // We use your utility to check every NPC in the array
+        foreach (GameObject npcObj in npcArray)
         {
-            // We hit something! Check if it has the NPCWander script attached
-            NPCWander npc = hit.collider.GetComponentInParent<NPCWander>();
+            if (npcObj == null) continue;
 
-            if (npc != null)
+            // Use IsPointedAt to see if the player is aiming at this specific NPC
+            if (LookAtUtility.IsPointedAt(playerCamera, npcObj, 0f, interactDistance))
             {
-                // Freeze whoever they clicked on
-                npc.FreezeAndInteract();
+                // We found the NPC being looked at!
+                NPCWander npcScript = npcObj.GetComponent<NPCWander>();
 
-                // --- THE GUESSING LOGIC ---
-                // Did they click on the real one?
-                if (npc.gameObject == realNPC)
+                if (npcScript != null)
                 {
-                    Debug.Log("Correct guess!");
-                    SolvePuzzle();
+                    npcScript.FreezeAndInteract();
+
+                    // --- THE GUESSING LOGIC ---
+                    if (npcObj == realNPC)
+                    {
+                        Debug.Log("Correct guess!");
+                        SolvePuzzle();
+                    }
+                    else
+                    {
+                        Debug.Log("Wrong NPC! Initiating penalty...");
+                        StartCoroutine(PenaltyTeleportSequence(npcScript));
+                    }
                 }
-                else
-                {
-                    StartCoroutine(PenaltyTeleportSequence(npc));
-                }
+
+                // We found our target, so we can stop looking through the rest of the array
+                break;
             }
         }
     }
@@ -199,7 +197,7 @@ public class RealNPC : Puzzle
         if (playerCamera != null)
         {
            
-            playerCamera.root.rotation = Quaternion.identity;
+            playerCamera.transform.root.rotation = Quaternion.identity;
 
         
         }

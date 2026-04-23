@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Puzzle : MonoBehaviour
 {
+    protected GameObject player;
+    protected Camera playerCamera;
     public PuzzleData puzzleData;
     public bool isSolved = false;
     public bool hasStarted = false;
@@ -14,10 +16,16 @@ public abstract class Puzzle : MonoBehaviour
     public Transform checkpointInitialLocation;
     public Transform checkpointFinishLocation;
 
-   
+
+    protected virtual void Awake()
+    {
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player");
+        if (playerCamera == null) playerCamera = Camera.main;
+    }
 
     public virtual void StartPuzzle()
     {
+       
         if (isSolved) return;
         Debug.Log($"Starting puzzle: {puzzleData.puzzleName}");
         hasStarted = true;

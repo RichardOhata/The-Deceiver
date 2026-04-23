@@ -2,26 +2,23 @@ using UnityEngine;
 
 public class StepSoundMemory : Puzzle
 {
-    [SerializeField]
-    private GameObject pathTitles;
 
-    [SerializeField]
-    private GameObject correctTitles;
+    [Header("Puzzle Components")]
+    [SerializeField] private GameObject pathTitles;
 
-    [SerializeField]
-    private GameObject incorrectTitles;
+    [SerializeField] private GameObject correctTitles;
+
+    [SerializeField] private GameObject incorrectTitles;
 
     [SerializeField]
     private GameObject slidingDoor;
 
-    [SerializeField]
-    private GameObject updatedCheckpoint;
-
     private FirstPersonAudio playerAudio;
 
     private int activeZones = 0;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.stepSoundMemory.isSolved;

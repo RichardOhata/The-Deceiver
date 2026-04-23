@@ -25,8 +25,9 @@ public class InputCombination : Puzzle
 
     [SerializeField] private AreaManager areaManager;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             switch (instanceID)

@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8da4b67d0f24fa142affe02ac2e797dc, type: 3}
-  m_Name: FillInTheHolePuzzle
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleData
-  puzzleName: Fill in the hole
-  puzzleType: 3
-  hint: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:3184f9ee2bf6a938b7543feff2b866108ac2204fa311075e8696c9852b36fcaa
+size 491

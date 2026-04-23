@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class InvisibleBridgePuzzle : Puzzle
 {
-
+    [Header("Puzzle Components")]
     [SerializeField] private GameObject eyeSymbol;
     [SerializeField] private GameObject invisibleBridge;
-    [SerializeField] private Transform playerCamera;
     [SerializeField] private float maxAngle = 10f;
-
     [SerializeField] private Light eyeLight;
     private float maxIntensity = 1.0f;
     [SerializeField] private float intensitySpeed = 0.9f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.invisibleBridge.isSolved;
@@ -37,7 +36,7 @@ public class InvisibleBridgePuzzle : Puzzle
 
     private void Update()
     {
-        bool looking = LookAtUtility.IsLookingAt(playerCamera, eyeSymbol.transform, maxAngle);
+        bool looking = LookAtUtility.IsLookingAt(playerCamera.transform, eyeSymbol.transform, maxAngle);
         invisibleBridge.SetActive(looking);
         LightUp(looking);
     }

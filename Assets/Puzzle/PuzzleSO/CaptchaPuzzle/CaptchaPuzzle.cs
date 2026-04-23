@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class CaptchaPuzzle : Puzzle
 {
-    
-    [SerializeField] private GameObject captchaUI;
-    [SerializeField] private GameObject captchaConsole;
+    [Header("Puzzle Components")]
     [SerializeField] private int stage = 1;
     [SerializeField] private const int lastStage = 4;
-    [SerializeField] private GameObject interactTrigger;
     [SerializeField] private GameObject hiddenUIText;
-
     [SerializeField] private GameObject puzzleText;
-    private GameObject player;
+    [SerializeField] private GameObject monitor;
+ 
+    [Header("UI References")]
+    [SerializeField] private GameObject captchaUI;
+    [SerializeField] private GameObject backgroundDimmer;
+    [SerializeField] private UIUpdate uiPrompt;
+
 
     [SerializeField] private GameObject slidingDoor;
-    [SerializeField] private GameObject monitor;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.captcha.isSolved;
@@ -36,24 +37,35 @@ public class CaptchaPuzzle : Puzzle
             Animator anim = slidingDoor.GetComponent<Animator>();
             anim.SetTrigger("Door_Open");
             anim.speed = 100f;
-            interactTrigger.SetActive(false);
             monitor.GetComponent<ExplodableMonitor>().ExplodeMonitor();
             puzzleText.SetActive(false);
             hiddenUIText.SetActive(true);
             OnDisable();
         }
     }
+    private void Update()
+    {
+        if (isSolved) return;
+
+    
+        if (CanInteractWithConsole() && !IsUIOpen)
+        {
+            uiPrompt.updatePanelText(); 
+        }
+        else
+        {
+            uiPrompt.DisablePanel();
+        }
+    }
 
     public override void StartPuzzle()
     {
         base.StartPuzzle();
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        interactTrigger.SetActive(false);
         OnDisable();
     }
 
@@ -77,26 +89,21 @@ public class CaptchaPuzzle : Puzzle
         Debug.Log("Checkpoint and Puzzle State Auto-Saved!");
     }
 
-    private bool IsPlayerNearConsole()
+    private bool CanInteractWithConsole()
     {
-        if (player == null) return false;
-
-        float distance = Vector3.Distance(player.transform.position, captchaConsole.transform.position);
-        return distance < 3f; // example: within 3 units
+        if (base.player == null) return false;
+       
+        return LookAtUtility.IsPointedAt(base.playerCamera, monitor, 0.5f, 3.5f);
     }
 
     private void ToggleCaptchaUI(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        interactTrigger.GetComponent<UIUpdate>().updatePanelText("");
-        if (captchaUI.gameObject.activeSelf)
+    
+        if (!captchaUI.activeSelf && CanInteractWithConsole())
         {
-            return;
-        }
-
-        if (!captchaUI.gameObject.activeSelf && IsPlayerNearConsole())
-        {
-            captchaUI.SetActive(true);
-            PauseMenuLogic.Instance.HandlePause(false);
+            captchaUI.gameObject.SetActive(true);
+            backgroundDimmer.SetActive(true);
+            PauseMenuLogic.Instance.HandlePause(false); 
         }
     }
 
@@ -105,6 +112,7 @@ public class CaptchaPuzzle : Puzzle
     public override void CloseUI()
     {
         captchaUI.SetActive(false);
+        backgroundDimmer.SetActive(false);
         PauseMenuLogic.Instance.HandlePause(false);
     }
 

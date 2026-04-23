@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class InvisibleBridgePuzzle2 : Puzzle
 {
+    [Header("Puzzle Components")]
     [SerializeField] private GameObject invisibleBridge;
-
     private bool initialFullScreenState;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.invisibleBridge2.isSolved;
@@ -16,10 +17,8 @@ public class InvisibleBridgePuzzle2 : Puzzle
         if (isSolved)
         {
             DisplayBridge(true);
-            
         }
     }
-
 
     public override void StartPuzzle()
     {

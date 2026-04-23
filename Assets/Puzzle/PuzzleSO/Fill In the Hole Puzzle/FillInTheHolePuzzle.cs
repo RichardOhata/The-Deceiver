@@ -2,32 +2,19 @@ using UnityEngine;
 
 public class FillInTheHolePuzzle : Puzzle
 {
-    [SerializeField]
-    private Camera playerCamera;
-
-    [SerializeField]
-    private GameObject target;
-
-    [SerializeField]
-    private float minDistance = 16f;
-
-    [SerializeField]
-    private float maxDistance = 20.5f;
-
-    [SerializeField]
-    private float counter = 0.0f;
-
-    [SerializeField]
-    private float counterEnd = 0.7f;
-
-
-    [SerializeField]
-    private GameObject reticleCube;
+    [Header("Puzzle Components")]
+    [SerializeField] private GameObject target;
+    [SerializeField] private float minDistance = 16f;
+    [SerializeField] private float maxDistance = 20.5f;
+    [SerializeField] private float counter = 0.0f;
+    [SerializeField] private float counterEnd = 0.7f;
+    [SerializeField] private GameObject reticleCube;
 
     [SerializeField] private AreaManager areaManager;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.fillInTheHole.isSolved;

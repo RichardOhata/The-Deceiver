@@ -8,22 +8,18 @@ public enum MazeIdentifier
 
 public class ReverseMaze : Puzzle
 {
-    [SerializeField]
-    private MazeIdentifier MazeID;
+    [Header("Puzzle Components")]
+    [SerializeField] private MazeIdentifier MazeID;
+    [SerializeField] private int activeZones = 0;
+    [SerializeField] private Drawboard drawBoard;
 
-    [SerializeField]
-    private FirstPersonAudio playerAudio;
-
-    [SerializeField]
-    private int activeZones = 0;
-
-    [SerializeField]
-    private Drawboard drawBoard;
+    [SerializeField] private FirstPersonAudio playerAudio;
 
     [SerializeField] private AreaManager areaManager;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             switch (MazeID)

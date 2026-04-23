@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpBaitPuzzle : Puzzle
 {
+    [Header("Puzzle Components")]
     [SerializeField] private GameObject jumpTrigger;
     [SerializeField] private TextMeshProUGUI pauseMenuText;
     [SerializeField] private GameObject jumpUITrigger;
@@ -12,8 +13,9 @@ public class JumpBaitPuzzle : Puzzle
     private bool playerIsInRangeFirst = false;
     private bool playerIsInRangeSecond = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.jumpBait.isSolved;

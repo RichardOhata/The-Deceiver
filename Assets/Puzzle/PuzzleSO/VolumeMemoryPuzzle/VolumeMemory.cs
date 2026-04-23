@@ -2,20 +2,15 @@ using UnityEngine;
 
 public class VolumeMemory : Puzzle
 {
-    [SerializeField]
-    private GameObject smoothingRow;
+    [Header("Puzzle Components")]
+    [SerializeField] private GameObject smoothingRow;
+    [SerializeField] private GameObject sensRow;
+    [SerializeField] private GameObject volumeRow;
+    [SerializeField] private GameObject updatedCheckpoint;
 
-    [SerializeField]
-    private GameObject sensRow;
-
-    [SerializeField]
-    private GameObject volumeRow;
-
-    [SerializeField]
-    private GameObject updatedCheckpoint;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.volumeMemory.isSolved;
@@ -30,7 +25,6 @@ public class VolumeMemory : Puzzle
     public override void SolvePuzzle()
     {
         base.SolvePuzzle();
-        //SaveCheckPointLocation(updatedCheckpoint);
     }
 
 
