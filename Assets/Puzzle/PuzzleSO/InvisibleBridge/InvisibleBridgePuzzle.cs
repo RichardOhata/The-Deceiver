@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InvisibleBridgePuzzle : Puzzle
@@ -17,6 +18,19 @@ public class InvisibleBridgePuzzle : Puzzle
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.invisibleBridge.isSolved;
         }
+    }
+
+    private void OnEnable()
+    {
+        eyeSymbol.GetComponent<EyeFollow>().enabled = true;
+    }
+    private void OnDisable()
+    {
+        if (eyeLight != null)
+        {
+            eyeLight.intensity = 0f;
+        }
+        eyeSymbol.GetComponent<EyeFollow>().enabled = false;
     }
     public override void StartPuzzle()
     {
@@ -51,11 +65,5 @@ public class InvisibleBridgePuzzle : Puzzle
         );
     }
 
-    private void OnDisable()
-    {
-        if (eyeLight != null)
-        {
-            eyeLight.intensity = 0f;
-        }
-    }
+
 }

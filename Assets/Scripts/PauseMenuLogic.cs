@@ -153,5 +153,6 @@ public class PauseMenuLogic : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Title Screen");
+        AudioListener.pause = false;
     }
 }

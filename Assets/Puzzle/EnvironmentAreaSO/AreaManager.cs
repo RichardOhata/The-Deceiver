@@ -68,7 +68,6 @@ public class AreaManager : MonoBehaviour
         // Use the helper method from the SO
         string progress = currentArea.GetProgressString(_puzzlesSolved);
         progressionText.text = progress;
-        Debug.Log($"Current Progress: {progress}");
     }
 
     private ISeasonalData GetCurrentAreaData()
