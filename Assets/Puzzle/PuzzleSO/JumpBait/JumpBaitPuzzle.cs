@@ -12,13 +12,17 @@ public class JumpBaitPuzzle : Puzzle
     [SerializeField] private GameObject secondPlatform;
     private bool playerIsInRangeFirst = false;
     private bool playerIsInRangeSecond = false;
-
+    [SerializeField] private GameObject middleLine;
     protected override void Awake()
     {
         base.Awake();
         if (SaveManager.Instance != null)
         {
             isSolved = SaveManager.Instance.currentData.puzzleProgress.jumpBait.isSolved;
+            if (SaveManager.Instance.currentData.puzzleProgress.jumpBait.middleLineVisible)
+            {
+                middleLine.SetActive(true);
+            }
         }
     }
     public override void StartPuzzle()
@@ -88,8 +92,8 @@ public class JumpBaitPuzzle : Puzzle
 
     public void DisableSecondPlatform()
     {
-
         StartCoroutine(ReactivatePlatformAfterDelay(secondPlatform, 2f));
+     
     }
 
 
@@ -101,7 +105,12 @@ public class JumpBaitPuzzle : Puzzle
   
         yield return new WaitForSeconds(delayTime);
 
-
+        if (platform == secondPlatform && !middleLine.activeSelf)
+        {
+            middleLine.SetActive(true);
+            SaveManager.Instance.currentData.puzzleProgress.jumpBait.middleLineVisible = true;
+        }
+      
         platform.SetActive(true);
     }
 

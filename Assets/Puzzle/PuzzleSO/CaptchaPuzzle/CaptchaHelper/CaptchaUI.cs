@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class CaptchaUI : MonoBehaviour { 
     [Header("UI References: ")]
-
     [SerializeField] private Image uiCodeImage;
     [SerializeField] private TMP_InputField uiCodeInput;
     [SerializeField] private TextMeshProUGUI uiErrorText;
@@ -18,7 +17,10 @@ public class CaptchaUI : MonoBehaviour {
     [Header("Captcha Generator: ")]
     [SerializeField] private CaptchaGenerator captchaGenerator;
 
-    //[SerializeField] private CaptchaPuzzle captchaPuzzle; // Captcha Gameobject
+    [Header("Audio References: ")]
+    [SerializeField] private AudioSource uiSuccess;
+    [SerializeField] private AudioSource uiError;
+
 
     private Captcha currentCaptcha;
 
@@ -57,6 +59,8 @@ public class CaptchaUI : MonoBehaviour {
         if (isValid)
         {
             uiSubmitButton.interactable = false;
+            uiSuccess.ignoreListenerPause = true;
+            uiSuccess.Play();
             uiCorrectText.gameObject.SetActive(true);
 
             StartCoroutine(DelayedAction(1.0f, () =>
@@ -71,6 +75,8 @@ public class CaptchaUI : MonoBehaviour {
         else
         {
             uiErrorText.gameObject.SetActive(true);
+            uiError.Play();
+            uiError.ignoreListenerPause = true;
         }
     }
 

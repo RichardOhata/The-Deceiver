@@ -80,4 +80,9 @@ public class SaveManager : MonoBehaviour
         SaveGame();
         UnityEngine.Debug.Log("All save data has been reset to defaults via Inspector.");
     }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
+    }
 }

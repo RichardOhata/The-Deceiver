@@ -793,7 +793,6 @@ MonoBehaviour:
   saveCheckpointOnSolve: 0
   checkpointInitialLocation: {fileID: 0}
   checkpointFinishLocation: {fileID: 0}
-  slidingDoor: {fileID: 5697709406976175765}
   stage: 1
   hiddenUIText: {fileID: 6836802296906547406}
   puzzleText: {fileID: 7023198872565915752}
@@ -801,6 +800,7 @@ MonoBehaviour:
   captchaUI: {fileID: 0}
   backgroundDimmer: {fileID: 0}
   uiPrompt: {fileID: 4565565250899863324}
+  slidingDoor: {fileID: 5697709406976175765}
 --- !u!114 &4565565250899863324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,123 +1019,6 @@ MonoBehaviour:
       - m_Target: {fileID: 7067446077870421142}
         m_TargetAssemblyTypeName: ModularTrigger, Assembly-CSharp
         m_MethodName: SetInactive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!1 &3670105130860193890
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1773403251366705163}
-  - component: {fileID: 4413524932446536695}
-  - component: {fileID: 3931471048304492204}
-  - component: {fileID: 7852753100423344837}
-  m_Layer: 0
-  m_Name: InteractTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1773403251366705163
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3670105130860193890}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -4.37, y: 0, z: 0.08000183}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4851242165927002020}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!65 &4413524932446536695
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3670105130860193890}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.926307, y: 4.8762174, z: 3.9376905}
-  m_Center: {x: 0.54811066, y: 2.466892, z: 0.20884539}
---- !u!114 &3931471048304492204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3670105130860193890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d225e6d480b10064b9f1aa42306780b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  uiPanel: {fileID: 0}
-  uiPanelText: E Interact
---- !u!114 &7852753100423344837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3670105130860193890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17822fb6990ef4549905c43f92414f5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModularTrigger
-  targetTag: Player
-  puzzles: []
-  gameObjects: []
-  onEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3931471048304492204}
-        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
-        m_MethodName: updatePanelText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3931471048304492204}
-        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
-        m_MethodName: DisablePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1809,7 +1692,6 @@ Transform:
   - {fileID: 2666932868311625525}
   - {fileID: 4610965550934867620}
   - {fileID: 7755105712909152145}
-  - {fileID: 1773403251366705163}
   m_Father: {fileID: 9043387401228232614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6836802296906547406
@@ -2131,15 +2013,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7023198872565915752}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.57440186}
+  m_LocalPosition: {x: 0, y: 0, z: 0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2610364650323614270}
   m_Father: {fileID: 3102541140625657409}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.47, y: 3.16}
+  m_AnchoredPosition: {x: -7.47, y: 3.95}
   m_SizeDelta: {x: 9.2364, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7695524086516332339
@@ -2211,7 +2094,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Solve the Captcha '
+  m_text: Solve the Captcha
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2245,7 +2128,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2723,6 +2606,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2007825779246835207, guid: 05ecaac3f46157c47abd4905b151397d, type: 3}
   m_PrefabInstance: {fileID: 1224730127842430748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2543876742394963686
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5756134337208120420}
+    m_Modifications:
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.456
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441777251422162407, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+      propertyPath: m_Name
+      value: arrow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+--- !u!4 &2610364650323614270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 537136422483852504, guid: 3f25aa774b634fd4788b1536ad172ad7, type: 3}
+  m_PrefabInstance: {fileID: 2543876742394963686}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3843870657458436133
 PrefabInstance:

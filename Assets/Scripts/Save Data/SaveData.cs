@@ -14,6 +14,7 @@ public class PlayerPositionData
 public class JumpBaitPuzzleData
 {
     public bool isSolved = false;
+    public bool middleLineVisible = false;
 }
 
 
