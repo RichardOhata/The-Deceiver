@@ -21,6 +21,10 @@ public class DisclaimerManager : MonoBehaviour
     private Coroutine sequenceCoroutine;
     private bool isSequenceComplete = false;
 
+    [Header("Input Settings")]
+    [SerializeField] private float inputCooldown; 
+    private float nextAllowedInputTime = 0f;
+
     void Start()
     {
         disclaimerHeaderText.GetComponent<CanvasGroup>().alpha = 0;
@@ -29,21 +33,29 @@ public class DisclaimerManager : MonoBehaviour
 
         disclaimerHeaderText.SetActive(false);
         disclaimerText.SetActive(false);
-        pressAnyKeyText.SetActive(false);
+        pressAnyKeyText.SetActive(false); 
+        nextAllowedInputTime = Time.time + inputCooldown + 1;
         sequenceCoroutine = StartCoroutine(ShowDisclaimerSequence());
+
     }
 
     void Update()
     {
-      
+        if (Time.time < nextAllowedInputTime)
+        {
+            return; 
+        }
+
         if (!isSequenceComplete && Input.GetMouseButtonDown(0))
         {
             SkipSequence();
-            pressAnyKeyText.GetComponent<TextEffect>().StartManualTagEffects();
         }
     
         else if (isSequenceComplete && Input.anyKeyDown)
         {
+            disclaimerHeaderText.GetComponent<CanvasGroup>().alpha = 0;
+            disclaimerText.GetComponent<CanvasGroup>().alpha = 0;
+            pressAnyKeyText.GetComponent<CanvasGroup>().alpha = 0;
             SceneManager.LoadScene(titleSceneName);
         }
     }
@@ -73,6 +85,7 @@ public class DisclaimerManager : MonoBehaviour
 
         isSequenceComplete = true;
         pressAnyKeyText.GetComponent<TextEffect>().StartManualEffects();
+        nextAllowedInputTime = Time.time + inputCooldown;
     }
 
     private void SkipSequence()
@@ -93,6 +106,7 @@ public class DisclaimerManager : MonoBehaviour
         isSequenceComplete = true;
 
         pressAnyKeyText.GetComponent<TextEffect>().StartManualEffects();
+        nextAllowedInputTime = Time.time + inputCooldown;
     }
 
     private void ForceTextVisible(GameObject textObject)
